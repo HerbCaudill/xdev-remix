@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Spinner } from "../components/Spinner"
+import { Spinner } from "./Spinner"
 
 export function Loading() {
   const [hung, setHung] = useState(false)

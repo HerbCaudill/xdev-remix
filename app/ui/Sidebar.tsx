@@ -25,7 +25,7 @@ export const Sidebar = () => {
     { name: "Settings", to: "/settings", icon: IconAdjustments },
     { name: "Team", to: "/team", icon: IconUsersGroup },
     { name: "Profile", to: "/profile", icon: IconUser },
-    { name: "Sign out", to: "/signout", icon: IconLogout2 },
+    { name: "Sign out", to: "/auth/signout", icon: IconLogout2 },
   ]
 
   return (

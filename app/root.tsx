@@ -9,6 +9,7 @@ import {
   useRouteError,
 } from "@remix-run/react"
 import "./index.css"
+import { Loading } from "./ui/Loading"
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -39,27 +40,27 @@ export default function App() {
 }
 
 export function HydrateFallback() {
-  return <p>Loading...</p>
+  return <Loading />
 }
 
-export function ErrorBoundary() {
-  const error = useRouteError() as Error
+// export function ErrorBoundary() {
+//   const error = useRouteError() as Error
 
-  if (isRouteErrorResponse(error)) {
-    return (
-      <>
-        <h1>
-          {error.status} {error.statusText}
-        </h1>
-        <p>{error.data}</p>
-      </>
-    )
-  }
+//   if (isRouteErrorResponse(error)) {
+//     return (
+//       <>
+//         <h1>
+//           {error.status} {error.statusText}
+//         </h1>
+//         <p>{error.data}</p>
+//       </>
+//     )
+//   }
 
-  return (
-    <>
-      <h1>Error!</h1>
-      <p>{error?.message ?? "Unknown error"}</p>
-    </>
-  )
-}
+//   return (
+//     <>
+//       <h1>Error!</h1>
+//       <p>{error?.message ?? "Unknown error"}</p>
+//     </>
+//   )
+// }

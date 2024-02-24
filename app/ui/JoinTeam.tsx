@@ -1,16 +1,16 @@
-import * as Auth from '@localfirst/auth'
-import cx from 'classnames'
-import { useState } from 'react'
-import { createDevice } from '../util/createDevice'
-import { initializeAuthRepo } from '../util/initializeAuthRepo'
-import { parseInvitationCode } from '../util/parseInvitationCode'
-import type { SetupCallback } from './FirstUseSetup'
+import * as Auth from "@localfirst/auth"
+import cx from "classnames"
+import { useState } from "react"
+import { createDevice } from "../lib/createDevice"
+import { initializeAuthRepo } from "../lib/initializeAuthRepo"
+import { parseInvitationCode } from "../lib/parseInvitationCode"
+import type { SetupCallback } from "./FirstUseSetup"
 
 export const JoinTeam = ({ joinAs, userName, onSetup }: Props) => {
-  const [invitationCode, setInvitationCode] = useState<string>('')
+  const [invitationCode, setInvitationCode] = useState<string>("")
 
   const getUserAndDevice = () => {
-    if (joinAs === 'MEMBER') {
+    if (joinAs === "MEMBER") {
       // Create new user and device
       const user = Auth.createUser(userName) as Auth.UserWithSecrets
       const device = createDevice(user.userId)
@@ -29,7 +29,7 @@ export const JoinTeam = ({ joinAs, userName, onSetup }: Props) => {
     auth.addInvitation({ shareId, invitationSeed, userName })
 
     // Once we're admitted, we'll get the Team data and our User object
-    auth.once('joined', ({ team, user }) => {
+    auth.once("joined", ({ team, user }) => {
       // Now we have our real userId, we can update the device
       device.userId = user.userId
 
@@ -39,7 +39,7 @@ export const JoinTeam = ({ joinAs, userName, onSetup }: Props) => {
 
   return (
     <form
-      className={cx(['flex flex-col space-y-4 p-4'])}
+      className={cx(["flex flex-col space-y-4 p-4"])}
       onSubmit={async e => {
         e.preventDefault()
         joinTeam()
@@ -71,7 +71,7 @@ export const JoinTeam = ({ joinAs, userName, onSetup }: Props) => {
 }
 
 type Props = {
-  joinAs: 'MEMBER' | 'DEVICE'
+  joinAs: "MEMBER" | "DEVICE"
   userName: string
   onSetup: SetupCallback
 }

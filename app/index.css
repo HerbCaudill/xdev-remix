@@ -4,9 +4,6 @@
 
 /* Typography */
 
-p {
-  @apply my-2;
-}
 h4 {
   @apply text-sm font-bold text-black mb-2;
 }

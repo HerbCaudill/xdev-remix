@@ -1,21 +1,15 @@
 import type { Repo } from "@automerge/automerge-repo"
 import { RepoContext } from "@automerge/automerge-repo-react-hooks"
 import type * as Auth from "@localfirst/auth"
-import {
-  getShareId,
-  type AuthProvider,
-} from "@localfirst/auth-provider-automerge-repo"
-import { createContext, useEffect, useState } from "react"
+import { getShareId, type AuthProvider } from "@localfirst/auth-provider-automerge-repo"
+import { useEffect, useState } from "react"
 import { useLocalState } from "../hooks/useLocalState"
-import type { AuthState } from "../types"
-import { initializeAuthRepo } from "../util/initializeAuthRepo"
+import { initializeAuthRepo } from "../lib/initializeAuthRepo"
 import { Card } from "./Card"
 import { FirstUseSetup } from "./FirstUseSetup"
-import { Layout } from "./Layout"
-import { assert } from "../util/assert"
-import { getRootDocumentIdFromTeam } from "../util/getRootDocumentIdFromTeam"
-
-export const AuthContext = createContext<AuthState | undefined>(undefined)
+import { assert } from "../lib/assert"
+import { getRootDocumentIdFromTeam } from "../lib/getRootDocumentIdFromTeam"
+import { AuthContext } from "./AuthContext"
 
 /**
  * To use the app, we need a user, a device, and a team. If we've used the app before,
@@ -45,35 +39,33 @@ export const AuthContextProvider = ({ children }: Props) => {
         })
       }
     },
-    [] // only on first render
+    [], // only on first render
   )
 
   // If we haven't used the app before, we need to create a user & device, and either create or join a team.
   if (!device) {
+    // replace this iwth navigation
+
     return (
-      <Layout>
-        <Card>
-          <FirstUseSetup
-            onSetup={({ user, device, team, auth, repo }) => {
-              const shareId = getShareId(team)
-              const rootDocumentId = getRootDocumentIdFromTeam(team)
-              updateLocalState({ user, device, shareId, rootDocumentId })
-              setTeam(team)
-              setAuth(auth)
-              setRepo(repo)
-            }}
-          />
-        </Card>
-      </Layout>
+      <Card>
+        <FirstUseSetup
+          onSetup={({ user, device, team, auth, repo }) => {
+            const shareId = getShareId(team)
+            const rootDocumentId = getRootDocumentIdFromTeam(team)
+            updateLocalState({ user, device, shareId, rootDocumentId })
+            setTeam(team)
+            setAuth(auth)
+            setRepo(repo)
+          }}
+        />
+      </Card>
     )
   }
 
   if (user && team && auth && repo) {
     return (
       <RepoContext.Provider value={repo}>
-        <AuthContext.Provider value={{ device, user, team, auth }}>
-          {children}
-        </AuthContext.Provider>
+        <AuthContext.Provider value={{ device, user, team, auth }}>{children}</AuthContext.Provider>
       </RepoContext.Provider>
     )
   }

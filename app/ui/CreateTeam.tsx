@@ -2,11 +2,11 @@ import * as Auth from "@localfirst/auth"
 import cx from "classnames"
 import { useState } from "react"
 import type { SharedState, Contact } from "../types"
-import { initializeAuthRepo } from "../util/initializeAuthRepo"
-import { storeRootDocumentIdOnTeam } from "../util/storeRootDocumentIdOnTeam"
+import { initializeAuthRepo } from "../lib/initializeAuthRepo"
+import { storeRootDocumentIdOnTeam } from "../lib/storeRootDocumentIdOnTeam"
 import { type SetupCallback } from "./FirstUseSetup"
-import { createDevice } from "../util/createDevice"
-import { getInitialContacts } from "../util/getInitialContacts"
+import { createDevice } from "../lib/createDevice"
+import { getInitialContacts } from "../lib/getInitialContacts"
 
 export const CreateTeam = ({ userName, onSetup }: Props) => {
   const [teamName, setTeamName] = useState<string>("")
@@ -67,10 +67,7 @@ export const CreateTeam = ({ userName, onSetup }: Props) => {
           value={teamName}
           onChange={e => setTeamName(e.target.value)}
         />
-        <button
-          type="submit"
-          className="button button-sm button-primary justify-center"
-        >
+        <button type="submit" className="button button-sm button-primary justify-center">
           Create team
         </button>
       </div>

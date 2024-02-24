@@ -1,9 +1,11 @@
 import { Transition, Dialog } from "@headlessui/react"
-import { Outlet } from "@remix-run/react"
-import { Fragment, useState } from "react"
-import { Sidebar } from "~/components/Sidebar"
-import { Fade } from "~/transitions/Fade"
-import { Slide } from "~/transitions/Slide"
+import { Outlet, useNavigate } from "@remix-run/react"
+import { Fragment, useEffect, useState } from "react"
+import { useAuth } from "~/hooks/useAuth"
+import { AuthContextProvider } from "~/ui/AuthContextProvider2"
+import { Sidebar } from "~/ui/Sidebar"
+import { Fade } from "~/ui/transitions/Fade"
+import { Slide } from "~/ui/transitions/Slide"
 
 export default function Index() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -32,7 +34,7 @@ export default function Index() {
   )
 
   return (
-    <>
+    <AuthContextProvider>
       <div>
         {/* slideout sidebar */}
         <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -70,7 +72,7 @@ export default function Index() {
           <Outlet />{" "}
         </main>
       </div>
-    </>
+    </AuthContextProvider>
   )
 }
 
