@@ -1,16 +1,5 @@
-import type { AutomergeUrl } from "@automerge/automerge-repo"
 import { useRepo } from "@automerge/automerge-repo-react-hooks"
 import type { LocalDate } from "@js-joda/core"
-import type {
-  DoneData,
-  ExtendedArray,
-  PartialDoneData,
-  SharedState,
-  Timestamp,
-} from "../types"
-import { useAuth } from "./useAuth"
-import { useDb } from "./useDb"
-import { useRootDocument } from "./useRootDocument"
 
 export const useDones = () => {
   const repo = useRepo()
@@ -30,15 +19,11 @@ export const useDones = () => {
   }
 
   /** Returns all dones for the given date range */
-  const forDateRange =
-    (start: LocalDate | string, end: LocalDate | string) => async () => {
-      const sStart = start.toString()
-      const sEnd = end.toString()
-      return db.dones
-        .where("date")
-        .between(sStart, sEnd, true, true)
-        .sortBy("timestamp")
-    }
+  const forDateRange = (start: LocalDate | string, end: LocalDate | string) => async () => {
+    const sStart = start.toString()
+    const sEnd = end.toString()
+    return db.dones.where("date").between(sStart, sEnd, true, true).sortBy("timestamp")
+  }
 
   // WRITE
 

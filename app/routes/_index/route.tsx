@@ -1,10 +1,4 @@
-import { Dialog, Transition } from "@headlessui/react"
-import { Outlet } from "@remix-run/react"
-import { Fragment, useState } from "react"
-import { Fade } from "~/ui/transitions/Fade"
-import { Slide } from "~/ui/transitions/Slide"
 import { AuthContextProvider } from "./AuthContextProvider2"
-import { Sidebar } from "./Sidebar"
 
 export default function Index() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -36,15 +30,15 @@ export default function Index() {
     <AuthContextProvider>
       <div>
         {/* slideout sidebar */}
-        <Transition.Root show={sidebarOpen} as={Fragment}>
-          <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
+        <Headless.Transition.Root show={sidebarOpen} as={Fragment}>
+          <Headless.Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
             <Fade>
               <Backdrop />
             </Fade>
             <div className="fixed inset-0 flex">
               <Slide>
                 {/* sidebar container */}
-                <Dialog.Panel className="flex w-full max-w-[12em]">
+                <Headless.Dialog.Panel className="flex w-full max-w-[12em]">
                   <Fade>
                     {/* close button */}
                     <CloseSidebarButton />
@@ -53,11 +47,11 @@ export default function Index() {
                   <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white">
                     <Sidebar />
                   </div>
-                </Dialog.Panel>
+                </Headless.Dialog.Panel>
               </Slide>
             </div>
-          </Dialog>
-        </Transition.Root>
+          </Headless.Dialog>
+        </Headless.Transition.Root>
 
         <div className={`hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-[12em] lg:flex-col`}>
           <Sidebar />

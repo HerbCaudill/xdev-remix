@@ -1,15 +1,6 @@
-import type { Repo } from "@automerge/automerge-repo"
 import { RepoContext } from "@automerge/automerge-repo-react-hooks"
-import type * as Auth from "@localfirst/auth"
-import { getShareId, type AuthProvider } from "@localfirst/auth-provider-automerge-repo"
-import { useEffect, useState } from "react"
-import { useLocalState } from "../../hooks/useLocalState"
-import { initializeAuthRepo } from "../../lib/initializeAuthRepo"
-import { Card } from "../../ui/Card"
-import { FirstUseSetup } from "./FirstUseSetup"
-import { assert } from "../../lib/assert"
-import { getRootDocumentIdFromTeam } from "../../lib/getRootDocumentIdFromTeam"
-import { AuthContext } from "./AuthContext"
+import { type AuthProvider } from "@localfirst/auth-provider-automerge-repo"
+import { type Repo } from "@automerge/automerge-repo"
 
 /**
  * To use the app, we need a user, a device, and a team. If we've used the app before,
@@ -20,7 +11,7 @@ export const AuthContextProvider = ({ children }: Props) => {
   const { user, device, shareId, updateLocalState } = useLocalState()
 
   // Local (component) state
-  const [team, setTeam] = useState<Auth.Team>()
+  const [team, setTeam] = useState<Team>()
   const [auth, setAuth] = useState<AuthProvider>()
   const [repo, setRepo] = useState<Repo>()
 

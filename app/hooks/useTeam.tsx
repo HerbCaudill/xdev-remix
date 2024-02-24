@@ -1,11 +1,4 @@
 import { useDocuments } from "@automerge/automerge-repo-react-hooks"
-import { getShareId } from "@localfirst/auth-provider-automerge-repo"
-import { useState } from "react"
-import { by } from "~/lib/by"
-import { type Contact } from "~/types"
-import { useAuth } from "./useAuth"
-import { useLocalState } from "./useLocalState"
-import { useRootDocument } from "./useRootDocument"
 
 export const useTeam = () => {
   const { user, team, auth } = useAuth()

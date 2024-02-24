@@ -1,5 +1,4 @@
 import Dexie, { type Table } from "dexie"
-import { type DoneData } from "../types"
 
 export class Db extends Dexie {
   dones!: Table<DoneData>

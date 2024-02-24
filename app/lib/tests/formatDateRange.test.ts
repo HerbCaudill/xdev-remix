@@ -1,16 +1,8 @@
 import { LocalDate } from "@js-joda/core"
-import { formatDateRange } from "../formatDateRange"
 
 describe("formatDateRange", () => {
-  const testCase = (
-    startOfWeek: string,
-    endOfWeek: string,
-    expected: string
-  ): void => {
-    const actual = formatDateRange(
-      LocalDate.parse(startOfWeek),
-      LocalDate.parse(endOfWeek)
-    )
+  const testCase = (startOfWeek: string, endOfWeek: string, expected: string): void => {
+    const actual = formatDateRange(LocalDate.parse(startOfWeek), LocalDate.parse(endOfWeek))
     expect(actual).toEqual(expected)
   }
 

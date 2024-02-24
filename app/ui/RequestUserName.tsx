@@ -1,19 +1,20 @@
-export default function UserName() {
-  const { updateLocalState } = useLocalState()
+export const RequestUserName = ({ onSubmit }: Props) => {
   const [userName, setUserName] = useState<string>("")
-  const navigate = useNavigate()
-
-  const onSubmit = (e: React.SyntheticEvent) => {
-    e.preventDefault()
+  const submitUserName = () => {
     if (userName === undefined || userName.length === 0) return
-    updateLocalState({ userName })
-    navigate("/auth/choices")
+    onSubmit(userName)
   }
 
   return (
-    <form className={cx(["flex flex-col space-y-4 p-4"])} onSubmit={onSubmit} autoComplete="off">
+    <form
+      className={cx(["flex flex-col space-y-4 p-4"])}
+      onSubmit={e => {
+        e.preventDefault()
+        submitUserName()
+      }}
+    >
       <p className="text-center">
-        <NoPasswordManager>Enter your first name to get started:</NoPasswordManager>
+        <label htmlFor="userName">Enter your first name to get started:</label>
       </p>
       <div
         className={cx([
@@ -23,7 +24,8 @@ export default function UserName() {
         ])}
       >
         <input
-          autoComplete="off"
+          id="userName"
+          name="userName"
           type="text"
           autoFocus={true}
           value={userName}
@@ -32,12 +34,17 @@ export default function UserName() {
           placeholder=""
         />
         <button
-          type="submit"
+          type="button"
           className="button button-sm button-primary justify-center sm:justify-stretch"
+          onClick={submitUserName}
         >
           Continue
         </button>
       </div>
     </form>
   )
+}
+
+type Props = {
+  onSubmit: (userName: string) => void
 }

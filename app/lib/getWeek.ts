@@ -1,5 +1,5 @@
 import { LocalDate } from "@js-joda/core"
-import { getSunday } from "./getSunday"
+import { getSunday } from "~/lib/getSunday"
 
 export function getWeek(date: LocalDate) {
   const start = getSunday(date)

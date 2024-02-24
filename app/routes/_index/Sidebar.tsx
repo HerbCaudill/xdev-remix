@@ -1,8 +1,3 @@
-import cx from "classnames"
-import { NavLink } from "@remix-run/react"
-import { Avatar } from "../../ui/Avatar"
-import type { NavItem } from "../../types"
-
 export const Sidebar = () => {
   // const { self } = useTeam()
   // if (self === undefined) return <Loading />

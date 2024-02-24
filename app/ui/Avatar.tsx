@@ -1,5 +1,4 @@
-import cx from "classnames"
-// import { useTeam } from "../hooks/useTeam"
+// import { useTeam } from "~/hooks/useTeam"
 
 export const Avatar = ({ className = "", size = "md", userId }: Props) => {
   // const { getContact } = useTeam()

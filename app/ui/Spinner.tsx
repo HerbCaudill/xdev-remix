@@ -1,11 +1,9 @@
-import cx from "classnames"
-
 export function Spinner({ size = 14 }: Props = {}) {
   return (
     <span
       className={cx(
         `inline-block px-1 animate-spin rounded-full`,
-        `border-solid border-black border-r-gray-200`
+        `border-solid border-black border-r-gray-200`,
       )}
       style={{
         height: size,

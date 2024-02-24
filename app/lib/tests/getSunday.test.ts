@@ -1,5 +1,4 @@
 import { LocalDate } from "@js-joda/core"
-import { getSunday } from "../getSunday"
 
 describe("getPreviousSunday", () => {
   const testCase = (date: string, sunday: string): void => {

@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom"
 import { useHotkeys } from "react-hotkeys-hook"
 
 export const useNavigationHotkey = (keys: string, path: string) => {

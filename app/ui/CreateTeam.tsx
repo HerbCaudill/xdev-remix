@@ -1,11 +1,5 @@
-export default function CreateTeam() {
+export const CreateTeam = ({ userName }: Props) => {
   const [teamName, setTeamName] = useState<string>("")
-  const { userName } = useLocalState()
-  const navigate = useNavigate()
-  if (!userName) {
-    navigate("/auth/username")
-    return
-  }
 
   const createTeam = async () => {
     if (!teamName || teamName.length === 0) return
@@ -38,7 +32,7 @@ export default function CreateTeam() {
     // Store the root document ID on the team so other devices can find it
     storeRootDocumentIdOnTeam(team, rootDocumentId)
 
-    navigate("/", { state: { device, user, team, auth, repo } })
+    // onSetup({ device, user, team, auth, repo })
   }
 
   return (
@@ -69,4 +63,8 @@ export default function CreateTeam() {
       </div>
     </form>
   )
+}
+
+type Props = {
+  userName: string
 }

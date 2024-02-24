@@ -1,7 +1,3 @@
-import * as Headless from "@headlessui/react"
-import cx from "classnames"
-import { Fragment } from "react"
-
 export const Dialog = ({
   isOpen,
   title,
@@ -44,9 +40,7 @@ export const Dialog = ({
                   />
                   <div className="mt-4 text-sm text-gray-500">{children}</div>
                 </div>
-                <div className="mt-5 flex flex-row justify-end space-x-2">
-                  {buttons}
-                </div>
+                <div className="mt-5 flex flex-row justify-end space-x-2">{buttons}</div>
               </Headless.Dialog.Panel>
             </Headless.Transition.Child>
           </div>

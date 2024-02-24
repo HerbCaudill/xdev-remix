@@ -130,6 +130,9 @@ devDependencies:
   '@remix-run/dev':
     specifier: ^2.7.2
     version: 2.7.2(@types/node@20.11.20)(ts-node@10.9.2)(typescript@5.3.3)(vite@5.1.4)
+  '@types/debug':
+    specifier: ^4.1.12
+    version: 4.1.12
   '@types/jest':
     specifier: ^29.4.0
     version: 29.5.12

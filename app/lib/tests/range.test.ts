@@ -1,5 +1,3 @@
-import { range } from "../range"
-
 describe("range", () => {
   test("with only stop returns array from 1 to 5", () => {
     expect(range(5)).toEqual([1, 2, 3, 4, 5])

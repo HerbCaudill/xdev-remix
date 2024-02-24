@@ -1,6 +1,3 @@
-import cx from "classnames"
-import { createElement, forwardRef } from "react"
-
 export const Button = forwardRef(
   <T extends ButtonTag>(
     {
@@ -13,7 +10,7 @@ export const Button = forwardRef(
       tag = "button" as T,
       ...remainingProps
     }: Props<T>,
-    ref: RefType<T>
+    ref: RefType<T>,
   ) => {
     const props = {
       // pass ref to underlying element
@@ -38,9 +35,9 @@ export const Button = forwardRef(
           <span className="text-[1.5em] mr-2">{icon}</span>
         : null}
         {children}
-      </span>
+      </span>,
     )
-  }
+  },
 )
 
 type ButtonTag = "button" | "a"
@@ -55,7 +52,6 @@ type Props<T extends ButtonTag> =
     center?: boolean
   }
 
-type ElementType<T extends ButtonTag> = //
-  T extends "button" ? HTMLButtonElement : HTMLAnchorElement
+type ElementType<T extends ButtonTag> = T extends "button" ? HTMLButtonElement : HTMLAnchorElement //
 
 type RefType<T extends ButtonTag> = React.Ref<ElementType<T>>

@@ -1,15 +1,6 @@
 import "@ibm/plex/css/ibm-plex.css"
-import {
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  isRouteErrorResponse,
-  useRouteError,
-} from "@remix-run/react"
-import "./index.css"
-import { Loading } from "./ui/Loading"
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "@remix-run/react"
+import "~/index.css"
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (

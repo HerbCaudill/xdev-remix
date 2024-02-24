@@ -1,5 +1,3 @@
-import { likesDescription } from "../likesDescription"
-
 describe("likesDescription", () => {
   test("sorts names", () => {
     expect(likes("b", "a")).toBe("a and b liked this")
@@ -15,7 +13,7 @@ describe("likesDescription", () => {
 
   test("does not elide anyone", () => {
     expect(likes("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")).toBe(
-      "a, b, c, d, e, f, g, h, i, and j liked this"
+      "a, b, c, d, e, f, g, h, i, and j liked this",
     )
   })
 

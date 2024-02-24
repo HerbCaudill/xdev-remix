@@ -1,10 +1,5 @@
-import { Repo, type PeerId } from "@automerge/automerge-repo"
 import { BrowserWebSocketClientAdapter } from "@automerge/automerge-repo-network-websocket"
 import { IndexedDBStorageAdapter } from "@automerge/automerge-repo-storage-indexeddb"
-import type * as Auth from "@localfirst/auth"
-import { AuthProvider } from "@localfirst/auth-provider-automerge-repo"
-import { eventPromise } from "./eventPromise"
-import { server, wsUrl } from "./getSyncServer.client"
 
 /**
  * Creates an auth provider and a repo with a shared storage adapter and a websocket adapter.
@@ -34,6 +29,6 @@ export const initializeAuthRepo = async ({ user, device }: Params) => {
 }
 
 type Params = {
-  user?: Auth.UserWithSecrets
-  device: Auth.DeviceWithSecrets
+  user?: UserWithSecrets
+  device: DeviceWithSecrets
 }

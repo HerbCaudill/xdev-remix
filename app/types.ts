@@ -1,5 +1,4 @@
 import type { AutomergeUrl, DocumentId } from "@automerge/automerge-repo"
-import type * as Auth from "@localfirst/auth"
 import type { AuthProvider, ShareId } from "@localfirst/auth-provider-automerge-repo"
 
 /** Unix timestamp (nominal type) */
@@ -20,17 +19,17 @@ export type SharedState = {
 
 /** AuthState contains data about our @localfirst/auth user, device, and team */
 export type AuthState = {
-  device: Auth.DeviceWithSecrets
-  user: Auth.UserWithSecrets
-  team: Auth.Team
+  device: DeviceWithSecrets
+  user: UserWithSecrets
+  team: Team
   auth: AuthProvider
 }
 
 /** LocalState contains any non-shared state data that we want to persist in local storage.  */
 export type LocalState = {
   userName?: string // the user's name (not the same as the user's id)
-  device?: Auth.DeviceWithSecrets // the local lf/auth device
-  user?: Auth.UserWithSecrets // the local lf/auth user
+  device?: DeviceWithSecrets // the local lf/auth device
+  user?: UserWithSecrets // the local lf/auth user
   shareId?: ShareId // truncated lf/auth team id
   rootDocumentId?: DocumentId
 }
@@ -69,7 +68,7 @@ export type Contact = {
 
   /** If this contact has been invited to the team, we store the invitation id so that when they're
    * admitted we can associate their localfirst/auth user with this contact */
-  invitationId?: Auth.Base58
+  invitationId?: Base58
 }
 
 export type Icon = (props: React.SVGProps<SVGSVGElement>) => React.ReactElement

@@ -1,11 +1,6 @@
-import * as Auth from "@localfirst/auth"
-import type { Contact } from "../types"
-import { CONTACTS } from "../contacts"
+import { CONTACTS } from "~/contacts"
 
-export const getInitialContacts = (
-  user: Auth.User,
-  teamName: string
-): Contact[] => {
+export const getInitialContacts = (user: User, teamName: string): Contact[] => {
   // HACK: For now, we're going to load the list of DevResults users from a hard-coded list. We'll
   // only do this when (a) the username given is in that list (e.g. "herb" or "fred"), and (2) the
   // team name is "DevResults".

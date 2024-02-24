@@ -1,15 +1,7 @@
-import { Repo, type PeerId } from "@automerge/automerge-repo"
 import { BrowserWebSocketClientAdapter } from "@automerge/automerge-repo-network-websocket"
 import { IndexedDBStorageAdapter } from "@automerge/automerge-repo-storage-indexeddb"
-import type * as Auth from "@localfirst/auth"
-import { AuthProvider } from "@localfirst/auth-provider-automerge-repo"
-import { eventPromise } from "./eventPromise"
-import { url } from "./getSyncServer.client"
 
-export async function createRepoWithAuth(
-  user: Auth.UserWithSecrets,
-  device: Auth.DeviceWithSecrets,
-) {
+export async function createRepoWithAuth(user: UserWithSecrets, device: DeviceWithSecrets) {
   const storage = new IndexedDBStorageAdapter()
   const auth = new AuthProvider({ user, device, storage })
 

@@ -1,5 +1,6 @@
 import { vitePlugin as remix } from "@remix-run/dev"
 import autoImport from "unplugin-auto-import/vite"
+import { Options as AutoImportOptions } from "unplugin-auto-import/dist/types.d.ts"
 import iconsResolver from "unplugin-icons/resolver"
 import icons from "unplugin-icons/vite"
 import { defineConfig } from "vite"
@@ -36,6 +37,57 @@ const pwaOptions: Partial<VitePWAOptions> = {
   },
 }
 
+// This is an experiment with auto-imports. Not totally sure how I feel about it yet - it's a bit magical.
+const autoImportOptions: AutoImportOptions = {
+  dirs: ["app", "app/context", "app/db", "app/hooks", "app/lib", "app/ui", "app/ui/transitions"],
+  imports: [
+    "react",
+    {
+      react: ["Fragment", "createContext"],
+      classnames: [["default", "cx"]],
+      "@localfirst/auth": [["*", "Auth"]],
+      "@automerge/automerge-repo": ["Repo"],
+      "@remix-run/react": ["useParams", "useNavigate", "useLocation", "Outlet", "Link", "NavLink"],
+      "@localfirst/auth-provider-automerge-repo": ["AuthProvider", "getShareId"],
+      "@headlessui/react": [["*", "Headless"]],
+    },
+    {
+      from: "~/types",
+      imports: [
+        "AuthState",
+        "Contact",
+        "DoneData",
+        "ExtendedArray",
+        "LocalState",
+        "Optional",
+        "SharedState",
+        "Timestamp",
+      ],
+      type: true,
+    },
+    {
+      from: "@localfirst/auth",
+      imports: ["Team", "User", "Device", "Base58", "UserWithSecrets", "DeviceWithSecrets"],
+      type: true,
+    },
+    {
+      from: "@automerge/automerge-repo",
+      imports: ["DocumentId", "PeerId", "AutomergeUrl"],
+      type: true,
+    },
+    { from: "@localfirst/auth-provider-automerge-repo", imports: ["ShareId"], type: true },
+  ],
+  dts: "./auto-imports.d.ts",
+  resolvers: [
+    iconsResolver({
+      prefix: false,
+      extension: "jsx",
+      enabledCollections: ["tabler"],
+      alias: { icon: "tabler" },
+    }),
+  ],
+}
+
 export default defineConfig({
   plugins: [
     remix({ ssr: false }), // SPA mode
@@ -43,17 +95,7 @@ export default defineConfig({
     wasm(),
     topLevelAwait(),
     VitePWA(pwaOptions),
-    autoImport({
-      dts: false,
-      resolvers: [
-        iconsResolver({
-          prefix: false,
-          extension: "jsx",
-          enabledCollections: ["tabler"],
-          alias: { icon: "tabler" },
-        }),
-      ],
-    }),
+    autoImport(autoImportOptions),
     icons({ compiler: "jsx", jsx: "react" }),
   ],
 
@@ -63,9 +105,7 @@ export default defineConfig({
   },
 
   optimizeDeps: {
-    // This is necessary because otherwise `vite dev` includes two separate versions of the JS
-    // wrapper. This causes problems because the JS wrapper has a module-level variable to track JS
-    // side heap allocations, and initializing this twice breaks things.
+    // without this `vite dev` includes two separate versions of the Automerge JS wrapper
     exclude: ["@automerge/automerge-wasm/bundler/bindgen_bg.wasm", "@syntect/wasm"],
   },
 

@@ -1,7 +1,3 @@
-import * as Headless from "@headlessui/react"
-import cx from "classnames"
-import { Fragment } from "react"
-
 export function Listbox<T>({
   onChange = () => {},
   optionData: data,
@@ -36,7 +32,7 @@ export function Listbox<T>({
                 "absolute z-10 mt-1 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ",
                 "ring-1 ring-black ring-opacity-5 focus:outline-none",
                 "max-h-[10em]",
-                "sm:max-h-max"
+                "sm:max-h-max",
               )}
             >
               {data.map(item => (
@@ -45,7 +41,7 @@ export function Listbox<T>({
                   className={({ active }) =>
                     cx(
                       active ? "text-white bg-primary-600" : "",
-                      "relative cursor-pointer select-none py-2 pl-3 pr-9"
+                      "relative cursor-pointer select-none py-2 pl-3 pr-9",
                     )
                   }
                   value={value(item)}

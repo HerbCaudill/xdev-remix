@@ -1,7 +1,3 @@
-import { Link, useNavigate } from "@remix-run/react"
-import { useEffect, useState } from "react"
-import { useLocalState } from "~/hooks/useLocalState"
-
 export default function SignOut() {
   const { updateLocalState } = useLocalState()
   const [showWarning, setShowWarning] = useState(true)

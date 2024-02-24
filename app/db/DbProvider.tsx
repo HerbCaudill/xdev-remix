@@ -1,9 +1,4 @@
-import { type AutomergeUrl, type DocumentId } from "@automerge/automerge-repo"
 import { useRepo } from "@automerge/automerge-repo-react-hooks"
-import { createContext, useEffect } from "react"
-import { useRootDocument } from "../hooks/useRootDocument"
-import type { DoneData } from "../types"
-import { db } from "./db"
 
 export type DoneLookup = Record<DocumentId, DoneData>
 
@@ -21,15 +16,11 @@ export const DbProvider = ({ children }: Props) => {
     if (state === undefined) return
 
     const syncDbWithRepo = async () => {
-      const dbIds = new Set(
-        (await db.dones.toCollection().primaryKeys()) as AutomergeUrl[]
-      )
+      const dbIds = new Set((await db.dones.toCollection().primaryKeys()) as AutomergeUrl[])
 
       // add new dones to the db
       const newUrls = Array.from(repoIds).filter(id => !dbIds.has(id))
-      const newDones = await Promise.all(
-        newUrls.map(async id => repo.find<DoneData>(id).doc())
-      )
+      const newDones = await Promise.all(newUrls.map(async id => repo.find<DoneData>(id).doc()))
       await db.dones.bulkAdd(newDones as DoneData[])
 
       // remove deleted dones from the db

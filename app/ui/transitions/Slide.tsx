@@ -1,9 +1,6 @@
-import { Transition } from "@headlessui/react"
-import { Fragment } from "react"
-
 export const Slide = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Transition.Child
+    <Headless.Transition.Child
       as={Fragment}
       enter="transition ease-in-out duration-200 transform"
       enterFrom="-translate-x-full"
@@ -13,6 +10,6 @@ export const Slide = ({ children }: { children: React.ReactNode }) => {
       leaveTo="-translate-x-full"
     >
       {children}
-    </Transition.Child>
+    </Headless.Transition.Child>
   )
 }

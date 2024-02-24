@@ -1,5 +1,3 @@
-import { Outlet } from "@remix-run/react"
-
 export default function Auth() {
   return (
     <div className="h-screen flex flex-col gap-2 items-center justify-center pb-[10%]">
