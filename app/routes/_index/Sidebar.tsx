@@ -1,13 +1,8 @@
+import { NavItem } from "~/types"
+
 export const Sidebar = () => {
-  // const { self } = useTeam()
-  // if (self === undefined) return <Loading />
-  const self = {
-    userId: "herb",
-    firstName: "Herb",
-    lastName: "Caudill",
-    avatarUrl: "https://www.devresults.com/images/staff/square/herb.jpg",
-    fullName: "Herb Caudill",
-  }
+  const { self } = useTeam()
+  if (self === undefined) return <Loading />
 
   const navigation: NavItem[] = [
     { name: "Dones", to: "/dones", icon: IconDiscountCheck },

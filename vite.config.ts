@@ -98,11 +98,7 @@ export default defineConfig({
     autoImport(autoImportOptions),
     icons({ compiler: "jsx", jsx: "react" }),
   ],
-
-  worker: {
-    format: "es",
-    plugins: () => [wasm(), topLevelAwait()],
-  },
+  worker: { format: "es", plugins: () => [wasm(), topLevelAwait()] },
 
   optimizeDeps: {
     // without this `vite dev` includes two separate versions of the Automerge JS wrapper

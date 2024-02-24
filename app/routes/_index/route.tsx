@@ -1,4 +1,5 @@
-import { AuthContextProvider } from "./AuthContextProvider2"
+import { AuthContextProvider } from "./auth/AuthContextProvider"
+import { Sidebar } from "./Sidebar"
 
 export default function Index() {
   const [sidebarOpen, setSidebarOpen] = useState(false)

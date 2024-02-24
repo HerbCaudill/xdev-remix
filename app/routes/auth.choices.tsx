@@ -10,7 +10,7 @@ export default function AuthChoices() {
   const { userName } = useLocalState()
   const navigate = useNavigate()
 
-  ///////
+  // hooks ↑
 
   if (!userName) navigate("/auth/username")
 
