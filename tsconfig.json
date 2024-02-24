@@ -1,24 +1,35 @@
 {
-  "include": ["env.d.ts", "**/*.ts", "**/*.tsx"],
   "compilerOptions": {
-    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "allowJs": true,
+    "baseUrl": ".",
     "isolatedModules": true,
-    "esModuleInterop": true,
     "jsx": "react-jsx",
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext",
+      "WebWorker"
+    ],
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "resolveJsonModule": true,
-    "target": "ES2022",
-    "strict": true,
-    "allowJs": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
+    "noEmit": true,
     "paths": {
-      "~/*": ["./app/*"]
+      "~/*": [
+        "./app/*"
+      ]
     },
-
-    // Remix takes care of building everything in `remix build`.
-    "noEmit": true
-  }
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ESNext",
+    "types": [
+      "unplugin-icons/types/react"
+    ]
+  },
+  "include": [
+    "icons.d.ts",
+    "env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }

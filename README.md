@@ -1,51 +1,47 @@
-# templates/spa
+# XDev: Project X for DevResults
 
-This template leverages [Remix SPA Mode](https://remix.run/docs/en/main/future/spa-mode) to build your app as a Single-Page Application using [Client Data](https://remix.run/docs/en/main/guides/client-data) for all of you data loads and mutations.
+This is a local-first application for internal use by DevResults staff.
 
-⚠️ This is built on top of the Remix Vite template. Remix support for Vite is currently unstable and not recommended for production.
+- [Original pitch](http://github.com/DevResults/DevResults/issues/3518)
+- [Spec for deliverable 1 (weekly updates)](http://github.com/DevResults/xdev/blob/spec-sprint-1/spec-sprint-1.md)
+- Spec for deliverable 2 (hours tracking): coming soon
 
-📖 See the [Remix Vite docs][remix-vite-docs] for details on supported features.
+### Development
 
-## Setup
+After cloning this repo and installing VS Code recommended extensions:
 
-```shellscript
-npx create-remix@latest --template remix-run/remix/templates/spa
+```bash
+yarn
+yarn dev
 ```
 
-## Development
+This will start a local sync server, and run `vite` in parallel to build and launch the application
+with hot reloading after code changes.
 
-You can develop your SPA app just like you would a normal Remix app, via:
+![screenshot](img/screenshot-20230211.jpg)
 
-```shellscript
-npm run dev
+#### Linking to local Automerge Repo codebase
+
+[Automerge Repo](http://github.com/automerge/automerge-repo) is an important dependency that is
+under active development and that we are contributing to. To link to a local copy of that codebase,
+you'll first need to run the following commands in the root directory of `automerge-repo`:
+
+```bash
+yarn workspace @automerge/automerge-repo link
+yarn workspace @automerge/automerge-repo-storage-indexeddb link
+yarn workspace @automerge/automerge-repo-react-hooks link
+yarn workspace @automerge/automerge-repo-network-websocket link
+yarn workspace @automerge/automerge-repo-network-messagechannel link
 ```
 
-## Production
+Then in the root directory of this repository, you can run `yarn linklocal` to link to your local
+code, and `yarn unlinklocal` to unlink and use the latest version published on npm.
 
-When you are ready to build a production version of your app, `npm run build` will generate your assets and an `index.html` for the SPA.
-
-```shellscript
-npm run build
-```
-
-### Preview
-
-You can preview the build locally with [vite preview](https://vitejs.dev/guide/cli#vite-preview) to serve all routes via the single `index.html` file:
-
-```shellscript
-npm run preview
-```
-
-> ![WARNING] `vite preview` is not designed for use as a production server
+After first cloning `automerge-repo`, and after any changes to that code, you'll need to run `yarn
+build` there (or `yarn watch` to have it rebuild automatically after changes).
 
 ### Deployment
 
-You can then serve your app from any HTTP server of your choosing. The server should be configured to serve multiple paths from a single root `/index.html` file (commonly called "SPA fallback"). Other steps may be required if the server doesn't directly support this functionality.
+The application and sync server are deployed to Azure and are available at [xdev.devresults.com](https://xdev.devresults.com).
 
-For a simple example, you could use [sirv-cli](https://www.npmjs.com/package/sirv-cli):
-
-```shellscript
-npx sirv-cli build/client/ --single
-```
-
-[remix-vite-docs]: https://remix.run/docs/en/main/future/vite
+TODO details
