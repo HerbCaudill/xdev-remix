@@ -1,7 +1,7 @@
 import cx from "classnames"
 import { NavLink } from "@remix-run/react"
-import { Avatar } from "./Avatar"
-import type { NavItem } from "../types"
+import { Avatar } from "../../ui/Avatar"
+import type { NavItem } from "../../types"
 
 export const Sidebar = () => {
   // const { self } = useTeam()

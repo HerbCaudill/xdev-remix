@@ -4,16 +4,15 @@ import { IndexedDBStorageAdapter } from "@automerge/automerge-repo-storage-index
 import type * as Auth from "@localfirst/auth"
 import { AuthProvider } from "@localfirst/auth-provider-automerge-repo"
 import { eventPromise } from "./eventPromise"
-import { getSyncServerWebsocketUrl } from "./getSyncServer"
+import { url } from "./getSyncServer.client"
 
 export async function createRepoWithAuth(
   user: Auth.UserWithSecrets,
-  device: Auth.DeviceWithSecrets
+  device: Auth.DeviceWithSecrets,
 ) {
   const storage = new IndexedDBStorageAdapter()
   const auth = new AuthProvider({ user, device, storage })
 
-  const url = getSyncServerWebsocketUrl()
   const adapter = new BrowserWebSocketClientAdapter(url)
   const authAdapter = auth.wrap(adapter)
 

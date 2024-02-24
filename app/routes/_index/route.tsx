@@ -1,11 +1,10 @@
-import { Transition, Dialog } from "@headlessui/react"
-import { Outlet, useNavigate } from "@remix-run/react"
-import { Fragment, useEffect, useState } from "react"
-import { useAuth } from "~/hooks/useAuth"
-import { AuthContextProvider } from "~/ui/AuthContextProvider2"
-import { Sidebar } from "~/ui/Sidebar"
+import { Dialog, Transition } from "@headlessui/react"
+import { Outlet } from "@remix-run/react"
+import { Fragment, useState } from "react"
 import { Fade } from "~/ui/transitions/Fade"
 import { Slide } from "~/ui/transitions/Slide"
+import { AuthContextProvider } from "./AuthContextProvider2"
+import { Sidebar } from "./Sidebar"
 
 export default function Index() {
   const [sidebarOpen, setSidebarOpen] = useState(false)

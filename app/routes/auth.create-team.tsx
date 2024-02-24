@@ -1,15 +1,22 @@
-import * as Auth from "@localfirst/auth"
 import cx from "classnames"
 import { useState } from "react"
-import type { SharedState, Contact } from "../types"
-import { initializeAuthRepo } from "../lib/initializeAuthRepo"
-import { storeRootDocumentIdOnTeam } from "../lib/storeRootDocumentIdOnTeam"
-import { type SetupCallback } from "./FirstUseSetup"
-import { createDevice } from "../lib/createDevice"
-import { getInitialContacts } from "../lib/getInitialContacts"
+import { useLocalState } from "~/hooks/useLocalState"
+import { getInitialContacts } from "~/lib/getInitialContacts"
+import { initializeAuthRepo } from "~/lib/initializeAuthRepo"
+import { storeRootDocumentIdOnTeam } from "~/lib/storeRootDocumentIdOnTeam"
+import { Contact, SharedState } from "~/types"
+import * as Auth from "@localfirst/auth"
+import { useNavigate } from "@remix-run/react"
+import { createDevice } from "~/lib/createDevice"
 
-export const CreateTeam = ({ userName, onSetup }: Props) => {
+export default function CreateTeam() {
   const [teamName, setTeamName] = useState<string>("")
+  const { userName } = useLocalState()
+  const navigate = useNavigate()
+  if (!userName) {
+    navigate("/auth/username")
+    return
+  }
 
   const createTeam = async () => {
     if (!teamName || teamName.length === 0) return
@@ -42,7 +49,7 @@ export const CreateTeam = ({ userName, onSetup }: Props) => {
     // Store the root document ID on the team so other devices can find it
     storeRootDocumentIdOnTeam(team, rootDocumentId)
 
-    onSetup({ device, user, team, auth, repo })
+    navigate("/")
   }
 
   return (
@@ -73,9 +80,4 @@ export const CreateTeam = ({ userName, onSetup }: Props) => {
       </div>
     </form>
   )
-}
-
-type Props = {
-  userName: string
-  onSetup: SetupCallback
 }

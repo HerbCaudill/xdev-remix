@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "build": "remix vite:build",
-    "dev": "remix vite:dev --port 3000",
+    "dev": "run-p dev:open dev:syncserver",
     "preview": "vite preview --port 3000",
     "start": "npx sirv-cli build/client/ --single --port 3000",
     "preinstall": "npx only-allow pnpm",
-    "dev:start": "vite --port 3000",
+    "dev:start": "remix vite:dev --port 3000",
     "dev:open": "pnpm dev:start --open",
     "dev:syncserver": "cross-env DEBUG=localfirst*,automerge* NODE_ENV=development node ./scripts/syncserver.js",
     "lint": "xo",

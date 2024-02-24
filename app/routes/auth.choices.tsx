@@ -1,9 +1,6 @@
-import { Repo } from "@automerge/automerge-repo"
-import type * as Auth from "@localfirst/auth"
-import { type AuthProvider } from "@localfirst/auth-provider-automerge-repo"
-import { Fragment, useState } from "react"
-import { useLocalState } from "../hooks/useLocalState"
 import { Link, useNavigate } from "@remix-run/react"
+import { Fragment } from "react"
+import { useLocalState } from "../hooks/useLocalState"
 
 /**
  * This is the first time we've used the app. We need a device, a user, and a team.
@@ -17,7 +14,8 @@ export default function FirstUseSetup() {
   const { userName } = useLocalState()
   const navigate = useNavigate()
 
-  // ----
+  ///////
+
   if (!userName) navigate("/auth/username")
 
   const options = [
@@ -25,20 +23,20 @@ export default function FirstUseSetup() {
       icon: <div className="transform -rotate-15">💌</div>,
       label: "Have an invitation code?",
       buttonText: "Join a team",
-      target: "/auth/member",
+      target: "/auth/join-team",
       autoFocus: true,
     },
     {
       icon: <div className="transform rotate-12">📱</div>,
       label: "Already joined on another device?",
       buttonText: "Authorize this device",
-      target: "/auth/device",
+      target: "/auth/authorize-device",
     },
     {
       icon: "🙋",
       label: "Starting something new?",
       buttonText: "Create a team",
-      target: "/auth/create",
+      target: "/auth/create-team",
     },
   ]
 
@@ -47,11 +45,11 @@ export default function FirstUseSetup() {
       {options.map(({ icon, label, buttonText, target, autoFocus }, i) => (
         <Fragment key={i}>
           <div className="grid grid-rows-subgrid row-span-3 text-center">
-            <p className="text-5xl">
+            <div className="text-5xl">
               <div className="align-text-bottom inline-block">{icon}</div>
-            </p>
-            <p className="p-5 text-balance">{label}</p>
-            <p className="p-3">
+            </div>
+            <div className="p-5 text-balance">{label}</div>
+            <div className="p-3">
               <Link
                 to={target}
                 className="button button-sm button-primary w-full h-full justify-center"
@@ -59,7 +57,7 @@ export default function FirstUseSetup() {
               >
                 {buttonText}
               </Link>
-            </p>
+            </div>
           </div>
         </Fragment>
       ))}

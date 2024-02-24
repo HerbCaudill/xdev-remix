@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { AuthContext } from "~/ui/AuthContext"
+import { AuthContext } from "~/routes/_index/AuthContext"
 
 // Convenience wrapper around our authContext for accessing the auth data and provider
 export const useAuth = () => {
