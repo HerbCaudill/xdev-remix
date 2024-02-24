@@ -13,7 +13,7 @@ export default function UserName() {
     e.preventDefault()
     if (userName === undefined || userName.length === 0) return
     updateLocalState({ userName })
-    navigate("/")
+    navigate("/auth/choices")
   }
 
   return (

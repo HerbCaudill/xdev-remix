@@ -36,6 +36,12 @@ module.exports = {
         semibold: 600,
         bold: 700,
       },
+      rotate: {
+        "-30": "-30deg",
+        "-15": "-15deg",
+        15: "15deg",
+        30: "30deg",
+      },
     },
   },
   variants: {
