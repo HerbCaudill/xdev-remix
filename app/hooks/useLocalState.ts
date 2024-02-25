@@ -1,4 +1,5 @@
 import { useLocalStorage } from "@uidotdev/usehooks"
+import { LocalState } from "~/types"
 
 export const useLocalState = () => {
   const initialState: LocalState = {}

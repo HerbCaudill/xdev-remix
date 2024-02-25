@@ -31,5 +31,8 @@
     "env.d.ts",
     "**/*.ts",
     "**/*.tsx"
+  ],
+  "exclude": [
+    "**/*.test.ts"
   ]
 }

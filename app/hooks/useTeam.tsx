@@ -3,6 +3,7 @@ import { useAuth } from "./useAuth"
 import { useRootDocument } from "./useRootDocument"
 import { useLocalState } from "./useLocalState"
 import { by } from "~/lib/by"
+import { Contact } from "~/types"
 
 export const useTeam = () => {
   const { user, team, auth } = useAuth()

@@ -3,6 +3,7 @@ import type { LocalDate } from "@js-joda/core"
 import { useDb } from "./useDb"
 import { useAuth } from "./useAuth"
 import { useRootDocument } from "./useRootDocument"
+import { PartialDoneData, DoneData, Timestamp, SharedState, ExtendedArray } from "~/types"
 
 export const useDones = () => {
   const repo = useRepo()
