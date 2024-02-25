@@ -1,4 +1,4 @@
-import { useTeam } from "hooks/useTeam"
+import { useTeam } from "auth/useTeam"
 
 export const Avatar = ({ className = "", size = "md", userId }: Props) => {
   const { getContact } = useTeam()

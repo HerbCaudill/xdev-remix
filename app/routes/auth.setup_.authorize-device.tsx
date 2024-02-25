@@ -9,7 +9,7 @@ export default function AuthorizeDevice() {
   // hooks ↑
 
   if (!userName) {
-    navigate("/auth/username")
+    navigate("/auth/begin")
     return
   }
 

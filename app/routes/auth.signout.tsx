@@ -1,13 +1,20 @@
 import { useLocalState } from "hooks/useLocalState"
 
 export default function SignOut() {
-  const { updateLocalState } = useLocalState()
+  const { shareId, signOut } = useLocalState()
   const [showWarning, setShowWarning] = useState(true)
 
-  const signOut = () => {
+  // hooks ↑
+
+  const onConfirm = () => {
     setShowWarning(false)
-    updateLocalState({ userName: undefined })
-    // TODO: clear out data
+
+    // remove our user & device info from local storage
+    signOut()
+
+    // nuke indexeddb
+    indexedDB.deleteDatabase("xdev")
+    indexedDB.deleteDatabase("automerge")
   }
 
   return showWarning ?
@@ -35,7 +42,7 @@ export default function SignOut() {
             No, go back
           </Link>
           <span className="grow" />
-          <button className="button button-md button-danger" onClick={signOut}>
+          <button className="button button-md button-danger" onClick={onConfirm}>
             Yes, sign out
           </button>
         </div>

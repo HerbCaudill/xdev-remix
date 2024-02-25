@@ -1,4 +1,4 @@
-import { useTeam } from "hooks/useTeam"
+import { useTeam } from "auth/useTeam"
 import { NavItem } from "types"
 import { Avatar } from "ui/Avatar"
 import { Loading } from "ui/Loading"

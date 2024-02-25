@@ -15,27 +15,27 @@ export default function AuthChoices() {
 
   // hooks ↑
 
-  if (!userName) navigate("/auth/username")
+  if (!userName) navigate("/auth/begin")
 
   const options = [
     {
       icon: <div className="transform -rotate-15">💌</div>,
       label: "Have an invitation code?",
       buttonText: "Join a team",
-      target: "/auth/join-team",
+      target: "/auth/setup/join-team",
       autoFocus: true,
     },
     {
       icon: <div className="transform rotate-12">📱</div>,
       label: "Already joined on another device?",
       buttonText: "Authorize this device",
-      target: "/auth/authorize-device",
+      target: "/auth/setup/authorize-device",
     },
     {
       icon: "🙋",
       label: "Starting something new?",
       buttonText: "Create a team",
-      target: "/auth/create-team",
+      target: "/auth/setup/create-team",
     },
   ]
 
