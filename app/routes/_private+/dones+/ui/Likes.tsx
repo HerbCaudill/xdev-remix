@@ -1,5 +1,5 @@
-import { useAuth } from "auth/useAuth"
-import { likesDescription } from "dones/likesDescription"
+import { useAuth } from "routes/auth+/hooks/useAuth"
+import { likesDescription } from "routes/_private+/dones+/lib/likesDescription"
 
 export function Likes({ likes }: Props) {
   const { user } = useAuth()

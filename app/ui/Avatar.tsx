@@ -1,4 +1,4 @@
-import { useTeam } from "auth/useTeam"
+import { useTeam } from "routes/auth+/hooks/useTeam"
 
 export function Avatar({ className = "", size = "md", userId }: Props) {
   const { getContact } = useTeam()

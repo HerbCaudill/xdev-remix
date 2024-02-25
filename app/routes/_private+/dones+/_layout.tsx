@@ -1,6 +1,6 @@
-import { DonesNav } from "dones/components/DonesNav"
-import { WeekNav } from "dones/components/WeekNav"
-import { useRedirect } from "lib/useRedirect"
+import { DonesNav } from "routes/_private+/dones+/ui/DonesNav"
+import { WeekNav } from "routes/_private+/dones+/ui/WeekNav"
+import { useRedirect } from "hooks/useRedirect"
 
 export default function Dones({ children }: { children: React.ReactNode }) {
   useRedirect({ from: "/dones", to: "/dones/me" })

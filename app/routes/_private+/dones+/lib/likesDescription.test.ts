@@ -1,4 +1,4 @@
-import { likesDescription } from "../likesDescription"
+import { likesDescription } from "./likesDescription"
 
 describe("likesDescription", () => {
   test("sorts names", () => {

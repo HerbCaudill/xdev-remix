@@ -1,5 +1,5 @@
 import { flatRoutes } from "remix-flat-routes"
-import { vitePlugin as remix } from "@remix-run/dev"
+import { vitePlugin as remix, VitePluginConfig } from "@remix-run/dev"
 import autoImport from "unplugin-auto-import/vite"
 import { Options as AutoImportOptions } from "unplugin-auto-import/dist/types.d.ts"
 import iconsResolver from "unplugin-icons/resolver"
@@ -9,6 +9,19 @@ import { VitePWA, type VitePWAOptions } from "vite-plugin-pwa"
 import topLevelAwait from "vite-plugin-top-level-await"
 import wasm from "vite-plugin-wasm"
 import tsconfigPaths from "vite-tsconfig-paths"
+
+const remixOptions: VitePluginConfig = {
+  // SPA mode https://remix.run/docs/en/main/future/spa-mode
+  ssr: false,
+
+  // see https://github.com/kiliman/remix-flat-routes
+  ignoredRouteFiles: ["**/*"],
+  routes: async defineRoutes =>
+    flatRoutes("routes", defineRoutes, {
+      // allow colocating route modules with their components
+      ignoredRouteFiles: ["**/lib/*", "**/hooks/*", "**/context/*", "**/ui/*"],
+    }),
+}
 
 const pwaOptions: Partial<VitePWAOptions> = {
   includeAssets: ["favicon.ico"],
@@ -39,6 +52,7 @@ const pwaOptions: Partial<VitePWAOptions> = {
 }
 
 // This is an experiment with auto-imports. Not totally sure how I feel about it yet - it's a bit magical.
+// see https://github.com/unplugin/unplugin-auto-import
 const autoImportOptions: AutoImportOptions = {
   imports: [
     "react",
@@ -84,14 +98,7 @@ const autoImportOptions: AutoImportOptions = {
 
 export default defineConfig({
   plugins: [
-    remix({
-      ssr: false, // SPA mode
-      ignoredRouteFiles: ["**/*"],
-      routes: async defineRoutes =>
-        flatRoutes("routes", defineRoutes, {
-          // ignoredRouteFiles: ["**/lib/*", "**/components/*", "**/ui/*"],
-        }),
-    }),
+    remix(remixOptions),
     tsconfigPaths(),
     wasm(),
     topLevelAwait(),

@@ -1,4 +1,4 @@
-import { AuthContextProvider } from "auth/AuthContextProvider"
+import { AuthContextProvider } from "routes/auth+/lib/AuthContextProvider"
 import { Backdrop } from "ui/Backdrop"
 import { Sidebar } from "ui/Sidebar"
 import { Fade } from "ui/transitions/Fade"

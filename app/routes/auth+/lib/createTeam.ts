@@ -1,8 +1,8 @@
-import { createDevice } from "auth/createDevice"
+import { createDevice } from "routes/auth+/lib/createDevice"
 import { SetupResult, CreateTeamInfo } from "./types"
-import { initializeAuthRepo } from "auth/initializeAuthRepo"
-import { getInitialContacts } from "auth/getInitialContacts"
-import { storeRootDocumentIdOnTeam } from "auth/storeRootDocumentIdOnTeam"
+import { initializeAuthRepo } from "routes/auth+/lib/initializeAuthRepo"
+import { getInitialContacts } from "routes/auth+/lib/getInitialContacts"
+import { storeRootDocumentIdOnTeam } from "routes/auth+/lib/storeRootDocumentIdOnTeam"
 import { Contact, SharedState } from "types"
 
 export const createTeam = async ({ userName, teamName }: CreateTeamInfo): Promise<SetupResult> => {

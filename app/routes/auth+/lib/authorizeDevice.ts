@@ -1,7 +1,7 @@
-import { createDevice } from "auth/createDevice"
+import { createDevice } from "routes/auth+/lib/createDevice"
 import { SetupResult, AuthorizeDeviceInfo } from "./types"
-import { initializeAuthRepo } from "auth/initializeAuthRepo"
-import { parseInvitationCode } from "auth/parseInvitationCode"
+import { initializeAuthRepo } from "routes/auth+/lib/initializeAuthRepo"
+import { parseInvitationCode } from "routes/auth+/lib/parseInvitationCode"
 import { eventPromise } from "lib/eventPromise"
 
 export const authorizeDevice = async ({

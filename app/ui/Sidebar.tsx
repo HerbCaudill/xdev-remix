@@ -1,4 +1,4 @@
-import { useTeam } from "auth/useTeam"
+import { useTeam } from "routes/auth+/hooks/useTeam"
 import { NavItem } from "types"
 import { Avatar } from "ui/Avatar"
 import { Loading } from "ui/Loading"

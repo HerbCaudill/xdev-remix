@@ -1,7 +1,7 @@
 import { Dialog } from "ui/Dialog"
 import { LocalDate } from "@js-joda/core"
-import { useTeam } from "auth/useTeam"
-import { useDones } from "dones/hooks/useDones"
+import { useTeam } from "routes/auth+/hooks/useTeam"
+import { useDones } from "routes/_private+/dones+/hooks/useDones"
 import { DoneData } from "types"
 import { parse } from "csv-parse/sync"
 

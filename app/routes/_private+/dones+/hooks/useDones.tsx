@@ -1,8 +1,8 @@
 import type { AutomergeUrl } from "@automerge/automerge-repo"
 import { useRepo } from "@automerge/automerge-repo-react-hooks"
 import type { LocalDate } from "@js-joda/core"
-import { useAuth } from "auth/useAuth"
-import { useDb } from "db/useDb"
+import { useAuth } from "routes/auth+/hooks/useAuth"
+import { useDb } from "context/useDb"
 import { useRootDocument } from "hooks/useRootDocument"
 import type { DoneData, ExtendedArray, PartialDoneData, SharedState, Timestamp } from "types"
 

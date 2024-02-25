@@ -3,8 +3,8 @@ import { RepoContext } from "@automerge/automerge-repo-react-hooks"
 import { type AuthProvider } from "@localfirst/auth-provider-automerge-repo"
 import { type Location } from "@remix-run/react"
 import { useLocalState } from "hooks/useLocalState"
-import { getRootDocumentIdFromTeam } from "auth/getRootDocumentIdFromTeam"
-import { initializeAuthRepo } from "auth/initializeAuthRepo"
+import { getRootDocumentIdFromTeam } from "routes/auth+/lib/getRootDocumentIdFromTeam"
+import { initializeAuthRepo } from "routes/auth+/lib/initializeAuthRepo"
 import { Loading } from "ui/Loading"
 import { setupAuth } from "./setupAuth"
 import { AuthSetupInfo } from "./types"
@@ -47,6 +47,8 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
       device ? "ALREADY_AUTHENTICATED"
       : setupInfo ? "COMPLETING_AUTH_FLOW"
       : "FIRST_LOAD"
+
+    console.log("AuthContextProvider", scenario)
 
     switch (scenario) {
       case "FIRST_LOAD":
