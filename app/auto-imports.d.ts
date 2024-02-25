@@ -11,6 +11,7 @@ declare global {
   const Headless: typeof import('@headlessui/react')
   const IconAdjustments: typeof import('~icons/tabler/adjustments.jsx')['default']
   const IconCalendarSmile: typeof import('~icons/tabler/calendar-smile.jsx')['default']
+  const IconCircleExclamation: typeof import('~icons/tabler/circle-exclamation.jsx')['default']
   const IconCircleX: typeof import('~icons/tabler/circle-x.jsx')['default']
   const IconDiscountCheck: typeof import('~icons/tabler/discount-check.jsx')['default']
   const IconExclamationCircle: typeof import('~icons/tabler/exclamation-circle.jsx')['default']

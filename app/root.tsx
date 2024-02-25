@@ -2,6 +2,7 @@ import "@ibm/plex/css/ibm-plex.css"
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "@remix-run/react"
 import "./index.css"
 import { Loading } from "./ui/Loading"
+import { Error } from "./ui/Error"
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -35,24 +36,6 @@ export function HydrateFallback() {
   return <Loading />
 }
 
-// export function ErrorBoundary() {
-//   const error = useRouteError() as Error
-
-//   if (isRouteErrorResponse(error)) {
-//     return (
-//       <>
-//         <h1>
-//           {error.status} {error.statusText}
-//         </h1>
-//         <p>{error.data}</p>
-//       </>
-//     )
-//   }
-
-//   return (
-//     <>
-//       <h1>Error!</h1>
-//       <p>{error?.message ?? "Unknown error"}</p>
-//     </>
-//   )
-// }
+export function ErrorBoundary() {
+  return <Error />
+}

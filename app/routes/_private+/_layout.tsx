@@ -1,10 +1,19 @@
 import { AuthContextProvider } from "routes/auth+/lib/AuthContextProvider"
 import { Backdrop } from "ui/Backdrop"
+import { Error } from "ui/Error"
 import { Sidebar } from "ui/Sidebar"
 import { Fade } from "ui/transitions/Fade"
 import { Slide } from "ui/transitions/Slide"
 
-export default function Index() {
+export default function PrivateLayout() {
+  return (
+    <Layout>
+      <Outlet />
+    </Layout>
+  )
+}
+
+function Layout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const ShowSidebarButton = () => (
@@ -65,10 +74,15 @@ export default function Index() {
         <ShowSidebarButton />
 
         {/* page */}
-        <main className={`lg:pl-[12em] h-screen w-full flex flex-col gap-2 pb-2`}>
-          <Outlet />{" "}
-        </main>
+        <main className={`lg:pl-[12em] h-screen w-full flex flex-col gap-2 pb-2`}>{children}</main>
       </div>
     </AuthContextProvider>
+  )
+}
+export function ErrorBoundary() {
+  return (
+    <Layout>
+      <Error />
+    </Layout>
   )
 }
