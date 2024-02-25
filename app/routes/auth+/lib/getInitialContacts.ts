@@ -1,4 +1,4 @@
-import { CONTACTS } from "contacts"
+import { CONTACTS } from "temp.contacts"
 import { Contact } from "types"
 
 export const getInitialContacts = (user: User, teamName: string): Contact[] => {

@@ -9,7 +9,7 @@ import {
 } from "workbox-precaching"
 import { NavigationRoute, registerRoute } from "workbox-routing"
 import { CacheFirst } from "workbox-strategies"
-import { CONTACTS } from "./contacts.js"
+import { CONTACTS } from "./temp.contacts.js"
 
 declare let self: ServiceWorkerGlobalScope
 
@@ -27,6 +27,7 @@ clientsClaim()
 
 // cache avatars from devresults.com
 // https://stackoverflow.com/questions/51984349/cache-remote-http-asset
+// this will no longer be necessary once contacts are stored in documents with the rest of the local data
 
 const cacheName = "avatar-cache"
 const avatarUrls = CONTACTS.map(user => user.avatarUrl) // e.g. https://www.devresults.com/images/staff/square/herb.jpg
