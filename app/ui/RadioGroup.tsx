@@ -53,7 +53,7 @@ export function RadioGroup<T extends string | number | boolean>({
 }
 
 type Props<T> = {
-  label: ReactNode
+  label: React.ReactNode
   initialValue: string
   onChange?: (value: string) => void
   options: Options<T>
@@ -62,6 +62,6 @@ type Props<T> = {
 type Options<T> =
   | Array<{
       value: T
-      label?: ReactNode
+      label?: React.ReactNode
     }>
   | string[]

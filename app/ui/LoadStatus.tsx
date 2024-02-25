@@ -1,3 +1,5 @@
+import { Spinner } from "./Spinner"
+
 export const LoadStatus = ({ objects }: Props) => (
   <div className="grid grid-cols-[20px_1fr] gap-1 p-8 text-sm">
     {Object.keys(objects).map(key => (

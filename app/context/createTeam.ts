@@ -1,4 +1,8 @@
+import { createDevice } from "~/lib/createDevice"
 import { SetupResult, CreateTeamInfo } from "./types"
+import { initializeAuthRepo } from "~/lib/initializeAuthRepo"
+import { getInitialContacts } from "~/lib/getInitialContacts"
+import { storeRootDocumentIdOnTeam } from "~/lib/storeRootDocumentIdOnTeam"
 
 export const createTeam = async ({ userName, teamName }: CreateTeamInfo): Promise<SetupResult> => {
   // Create new user and device

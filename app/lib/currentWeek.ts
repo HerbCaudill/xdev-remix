@@ -1,4 +1,5 @@
 import { LocalDate } from "@js-joda/core"
+import { getSunday } from "./getSunday"
 
 export const currentWeek = () => {
   const today = LocalDate.now()

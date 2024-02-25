@@ -1,5 +1,8 @@
 import { useRepo } from "@automerge/automerge-repo-react-hooks"
 import type { LocalDate } from "@js-joda/core"
+import { useDb } from "./useDb"
+import { useAuth } from "./useAuth"
+import { useRootDocument } from "./useRootDocument"
 
 export const useDones = () => {
   const repo = useRepo()

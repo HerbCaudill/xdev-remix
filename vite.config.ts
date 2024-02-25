@@ -39,7 +39,6 @@ const pwaOptions: Partial<VitePWAOptions> = {
 
 // This is an experiment with auto-imports. Not totally sure how I feel about it yet - it's a bit magical.
 const autoImportOptions: AutoImportOptions = {
-  dirs: ["app", "app/context", "app/db", "app/hooks", "app/lib", "app/ui", "app/ui/transitions"],
   imports: [
     "react",
     {
@@ -50,20 +49,6 @@ const autoImportOptions: AutoImportOptions = {
       "@remix-run/react": ["useParams", "useNavigate", "useLocation", "Outlet", "Link", "NavLink"],
       "@localfirst/auth-provider-automerge-repo": ["AuthProvider", "getShareId"],
       "@headlessui/react": [["*", "Headless"]],
-    },
-    {
-      from: "~/types",
-      imports: [
-        "AuthState",
-        "Contact",
-        "DoneData",
-        "ExtendedArray",
-        "LocalState",
-        "Optional",
-        "SharedState",
-        "Timestamp",
-      ],
-      type: true,
     },
     {
       from: "@localfirst/auth",

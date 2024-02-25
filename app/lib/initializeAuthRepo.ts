@@ -1,5 +1,7 @@
 import { BrowserWebSocketClientAdapter } from "@automerge/automerge-repo-network-websocket"
 import { IndexedDBStorageAdapter } from "@automerge/automerge-repo-storage-indexeddb"
+import { server, wsUrl } from "./getSyncServer.client"
+import { eventPromise } from "./eventPromise"
 
 /**
  * Creates an auth provider and a repo with a shared storage adapter and a websocket adapter.
