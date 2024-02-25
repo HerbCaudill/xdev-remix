@@ -9,21 +9,25 @@ import { Loading } from "ui/Loading"
 import { setupAuth } from "./setupAuth"
 import { AuthSetupInfo } from "./types"
 import { AuthState } from "types"
+import { assert } from "lib/assert"
 
 /**
- * This provider wraps the entire app. We can be in three possible states when we load:
+ * This provider wraps the entire app. We can be in three possible scenarios when we load:
  *
- * (A) We've used the app before. We'll know this is the case because we'll have a user & device in
- *     local storage. We can use these to instantiate the auth provider and the repo, each of which
- *     will have their own stuff in indexedDb.
+ * (A) FIRST LOAD
+ *     This is the very first load on first use. In this case, we need to start the auth flow by
+ *     redirecting to another route.
  *
- * (B) We've just completed the auth flow and we've been redirected back here. We'll know this is the
- *     case because the auth routes will use Remix's location state to pass back some setup info
+ * (B) COMPLETING AUTH FLOW
+ *     We've just gone through the auth flow and we've been redirected back here. We'll know this is
+ *     the case because the auth routes will use Remix's location state to pass back some setup info
  *     (e.g. a team name if we're creating a team, or an invitation code if we're joining a team),
  *     which will allow us to instantiate the user, device, team, auth provider, and repo.
  *
- * (C) This is the very first load on first use. In this case, we need to start the auth flow by
- *     redirecting to another route.
+ * (C) ALREADY AUTHENTICATED
+ *     We've used the app before. We'll know this is the case because we'll have a user & device in
+ *     local storage. We can use these to instantiate the auth provider and the repo, each of which
+ *     will have their own stuff in indexedDb.
  */
 export function AuthContextProvider({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate()
@@ -39,26 +43,41 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
 
   // On first render, check local storage for persisted state
   useEffect(() => {
-    if (device && user && shareId) {
-      // (A) We've used the app before - use our existing user & device to instantiate the auth provider and the repo.
-      initializeAuthRepo({ user, device }).then(({ auth, repo }) => {
-        // Get the team from the auth provider (which will have loaded it from storage).
-        const team = auth.getTeam(shareId)
-        // Now we have everything we need
-        setState({ team, auth, repo })
-      })
-    } else if (setupInfo) {
-      // (B) We've just completed the auth flow - use the setup info to instantiate the user, device, auth provider, and repo.
-      setupAuth(setupInfo).then(({ user, device, team, auth, repo }) => {
-        // The root document ID is stored on the team - get it and persist it locally.
-        const rootDocumentId = getRootDocumentIdFromTeam(team)
-        updateLocalState({ user, device, rootDocumentId })
-        // Now we have everything we need
-        setState({ team, auth, repo })
-      })
-    } else {
-      // (C) Very first use - begin the auth flow
-      navigate("/auth/begin")
+    const scenario =
+      device ? "ALREADY_AUTHENTICATED"
+      : setupInfo ? "COMPLETING_AUTH_FLOW"
+      : "FIRST_LOAD"
+
+    switch (scenario) {
+      case "FIRST_LOAD":
+        // start the auth flow
+        navigate("/auth/begin")
+        break
+      case "COMPLETING_AUTH_FLOW":
+        // process the setup info to get the team etc.
+        setupAuth(setupInfo).then(({ user, device, team, auth, repo }) => {
+          // The root document ID is stored on the team - get it and persist it locally.
+          const rootDocumentId = getRootDocumentIdFromTeam(team)
+          // The shareId is derived from the teamId
+          const shareId = getShareId(team)
+          updateLocalState({ user, device, rootDocumentId, shareId })
+          // Now we have everything we need
+          setState({ team, auth, repo })
+          navigate("/") // clear the setup info
+        })
+        break
+      case "ALREADY_AUTHENTICATED": {
+        assert(device)
+        assert(shareId)
+        // Initialize automerge repo with the auth provider
+        initializeAuthRepo({ user, device }).then(({ auth, repo }) => {
+          // Get the team from the auth provider (which will have loaded it from storage).
+          const team = auth.getTeam(shareId)
+          // Now we have everything we need
+          setState({ team, auth, repo })
+        })
+        break
+      }
     }
   }, [])
 
