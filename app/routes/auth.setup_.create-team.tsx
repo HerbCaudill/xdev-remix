@@ -2,7 +2,7 @@ import { AuthSetupInfo } from "auth/types"
 import { useLocalState } from "hooks/useLocalState"
 
 export default function CreateTeam() {
-  const [teamName, setTeamName] = useState<string>("")
+  const [teamName, setTeamName] = useState<string>("DevResults")
   const { userName } = useLocalState()
   const navigate = useNavigate()
 

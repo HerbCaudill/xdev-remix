@@ -51,9 +51,9 @@ export default function SignOut() {
         <span className="text-4xl p-4">👋</span>
         <p>You've been signed out.</p>
         <p>
-          <Link to="/" className="button button-md button-primary">
+          <a href="/" className="button button-md button-primary">
             Sign in again
-          </Link>
+          </a>
         </p>
       </div>
 }
