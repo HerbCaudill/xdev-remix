@@ -1,4 +1,4 @@
-import { useLocalState } from "~/hooks/useLocalState"
+import { useLocalState } from "hooks/useLocalState"
 import { AuthSetupInfo } from "../auth/types"
 
 export default function CreateTeam() {

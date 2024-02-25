@@ -1,4 +1,4 @@
-import { useLocalState } from "~/hooks/useLocalState"
+import { useLocalState } from "hooks/useLocalState"
 
 export default function SignOut() {
   const { updateLocalState } = useLocalState()

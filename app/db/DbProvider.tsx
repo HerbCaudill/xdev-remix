@@ -1,6 +1,6 @@
 import { useRepo } from "@automerge/automerge-repo-react-hooks"
-import { useRootDocument } from "~/hooks/useRootDocument"
-import { DoneData } from "~/types"
+import { useRootDocument } from "hooks/useRootDocument"
+import { DoneData } from "types"
 import { db } from "./db"
 
 export type DoneLookup = Record<DocumentId, DoneData>

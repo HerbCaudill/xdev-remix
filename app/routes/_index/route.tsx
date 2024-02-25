@@ -1,7 +1,7 @@
-import { AuthContextProvider } from "~/auth/AuthContextProvider"
+import { AuthContextProvider } from "auth/AuthContextProvider"
 import { Sidebar } from "./Sidebar"
-import { Fade } from "~/ui/transitions/Fade"
-import { Slide } from "~/ui/transitions/Slide"
+import { Fade } from "ui/transitions/Fade"
+import { Slide } from "ui/transitions/Slide"
 
 export default function Index() {
   const [sidebarOpen, setSidebarOpen] = useState(false)

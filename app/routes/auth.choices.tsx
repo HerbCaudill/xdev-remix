@@ -1,4 +1,4 @@
-import { useLocalState } from "~/hooks/useLocalState"
+import { useLocalState } from "hooks/useLocalState"
 
 /**
  * This is the first time we've used the app. We need a device, a user, and a team.

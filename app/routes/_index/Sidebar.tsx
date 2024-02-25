@@ -1,7 +1,7 @@
-import { useTeam } from "~/hooks/useTeam"
-import { NavItem } from "~/types"
-import { Avatar } from "~/ui/Avatar"
-import { Loading } from "~/ui/Loading"
+import { useTeam } from "hooks/useTeam"
+import { NavItem } from "types"
+import { Avatar } from "ui/Avatar"
+import { Loading } from "ui/Loading"
 
 export const Sidebar = () => {
   const { self } = useTeam()

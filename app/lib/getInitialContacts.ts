@@ -1,5 +1,5 @@
-import { CONTACTS } from "~/contacts"
-import { Contact } from "~/types"
+import { CONTACTS } from "contacts"
+import { Contact } from "types"
 
 export const getInitialContacts = (user: User, teamName: string): Contact[] => {
   // HACK: For now, we're going to load the list of DevResults users from a hard-coded list. We'll
