@@ -1,14 +1,15 @@
+import type { AutomergeUrl } from "@automerge/automerge-repo"
 import { useRepo } from "@automerge/automerge-repo-react-hooks"
 import type { LocalDate } from "@js-joda/core"
-import { useTeam } from "auth/useTeam"
-import { DoneData, ExtendedArray, PartialDoneData, SharedState, Timestamp } from "types"
+import { useAuth } from "auth/useAuth"
+import { useDb } from "db/useDb"
 import { useRootDocument } from "hooks/useRootDocument"
-import { useDb } from "./useDb"
+import type { DoneData, ExtendedArray, PartialDoneData, SharedState, Timestamp } from "types"
 
-export function useDones() {
+export const useDones = () => {
   const repo = useRepo()
   const db = useDb()
-  const { user } = useTeam()
+  const { user } = useAuth()
   const { userId } = user
 
   // `state` is our shared state. `state.dones` is a list of ids

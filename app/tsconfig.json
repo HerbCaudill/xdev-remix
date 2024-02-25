@@ -5,6 +5,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "types": [
+      "vitest/globals",
       "@remix-run/node",
       "unplugin-icons/types/react"
     ]
@@ -13,7 +14,4 @@
     "**/*.ts",
     "**/*.tsx",
   ],
-  "exclude": [
-    "**/*.test.ts"
-  ]
 }
