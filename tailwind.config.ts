@@ -1,5 +1,5 @@
-/** @type {import('tailwindcss').Config} */
-const colors = require("tailwindcss/colors")
+import type { Config } from "tailwindcss"
+import colors from "tailwindcss/colors"
 
 const emoji = "Segoe UI Emoji"
 const mono = "IBM Plex Mono"
@@ -7,7 +7,7 @@ const sans = "IBM Plex Sans"
 const condensed = "IBM Plex Sans Condensed"
 const serif = "IBM Plex Serif"
 
-module.exports = {
+const config: Config = {
   content: ["./**/*.{html,tsx}"],
   theme: {
     extend: {
@@ -27,14 +27,14 @@ module.exports = {
         danger: colors.red,
       },
       fontWeight: {
-        thin: 100,
-        extralight: 200,
-        light: 300,
-        normal: 400,
-        text: 450,
-        medium: 500,
-        semibold: 600,
-        bold: 700,
+        thin: "100",
+        extralight: "200",
+        light: "300",
+        normal: "400",
+        text: "450",
+        medium: "500",
+        semibold: "600",
+        bold: "700",
       },
       rotate: {
         "-30": "-30deg",
@@ -43,10 +43,5 @@ module.exports = {
         30: "30deg",
       },
     },
-  },
-  variants: {
-    opacity: ({ after }) => after(["group-hover", "group-focus", "disabled"]),
-    textColor: ({ after }) => after(["group-hover", "group-focus"]),
-    boxShadow: ({ after }) => after(["group-hover", "group-focus"]),
   },
 }

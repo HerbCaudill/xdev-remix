@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "baseUrl": ".",
     "isolatedModules": true,
     "jsx": "react-jsx",
     "lib": [
@@ -13,23 +12,14 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "noEmit": true,
-    "paths": {
-      "~/*": [
-        "./app/*"
-      ]
-    },
-    "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
     "target": "ESNext",
     "types": [
-      "unplugin-icons/types/react"
+      "vite/client",
     ]
   },
   "include": [
-    "icons.d.ts",
-    "env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ]
+    "*.ts",
+  ],
 }
