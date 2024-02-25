@@ -63,6 +63,7 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
   }, [])
 
   // hooks ↑
+
   if (device && user && state) {
     const { team, auth, repo } = state
     return (

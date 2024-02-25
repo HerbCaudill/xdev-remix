@@ -1,14 +1,14 @@
 import { useRepo } from "@automerge/automerge-repo-react-hooks"
 import type { LocalDate } from "@js-joda/core"
+import { useTeam } from "auth/useTeam"
+import { DoneData, ExtendedArray, PartialDoneData, SharedState, Timestamp } from "types"
+import { useRootDocument } from "hooks/useRootDocument"
 import { useDb } from "./useDb"
-import { useAuth } from "../auth/useAuth"
-import { useRootDocument } from "../hooks/useRootDocument"
-import { PartialDoneData, DoneData, Timestamp, SharedState, ExtendedArray } from "types"
 
 export function useDones() {
   const repo = useRepo()
   const db = useDb()
-  const { user } = useAuth()
+  const { user } = useTeam()
   const { userId } = user
 
   // `state` is our shared state. `state.dones` is a list of ids
@@ -16,6 +16,7 @@ export function useDones() {
 
   // READ
   // these return dexie queries to be used with useLiveQuery
+
   /** Returns all dones we know about  */
   const all = async () => {
     return db.dones.toArray()
@@ -29,6 +30,7 @@ export function useDones() {
   }
 
   // WRITE
+
   /** Adds a done for a specified user */
   const add = ({ content, date, userId, likes = [] }: PartialDoneData) => {
     const handle = repo.create<DoneData>()

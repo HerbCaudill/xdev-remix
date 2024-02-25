@@ -1,14 +1,12 @@
 import { useDocuments } from "@automerge/automerge-repo-react-hooks"
-import { useAuth } from "./useAuth"
-import { useRootDocument } from "../hooks/useRootDocument"
-import { useLocalState } from "../hooks/useLocalState"
 import { by } from "lib/by"
 import { Contact } from "types"
+import { useRootDocument } from "hooks/useRootDocument"
+import { useAuth } from "./useAuth"
 
 export function useTeam() {
-  const { user, team, auth } = useAuth()
+  const { user, team } = useAuth()
   const [rootDoc] = useRootDocument()
-  const { signOut: _signOut } = useLocalState()
 
   // Team members
   const { contacts: contactIds = [] } = rootDoc ?? {}
@@ -17,8 +15,13 @@ export function useTeam() {
   const [teamMembers, setTeamMembers] = useState(team.members())
   team.on("updated", () => setTeamMembers(team.members()))
 
+  // hooks ↑
+
   // Logged in member
+
   const selfIsAdmin = team.memberIsAdmin(user.userId)
+
+  // Join contact docs with team members
 
   const contacts = Object.entries(contactDocs)
     .map(([documentId, contact]) => {
@@ -45,19 +48,12 @@ export function useTeam() {
   const getContact = (userId: string) => contactMap[userId]
   const self = contacts.find(c => c.userId === user.userId)!
 
-  const signOut = async () => {
-    const shareId = getShareId(team)
-    await auth.removeShare(shareId)
-    signOut()
-  }
-
   return {
     team,
     user,
+    self,
+    contacts,
     contactMap,
     getContact,
-    contacts,
-    self,
-    signOut: _signOut,
   }
 }
