@@ -1,3 +1,5 @@
+import { likesDescription } from "../likesDescription"
+
 describe("likesDescription", () => {
   test("sorts names", () => {
     expect(likes("b", "a")).toBe("a and b liked this")
