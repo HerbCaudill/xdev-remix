@@ -1,5 +1,5 @@
 import { useLocalState } from "~/hooks/useLocalState"
-import { AuthSetupInfo } from "../context/types"
+import { AuthSetupInfo } from "../auth/types"
 
 export default function CreateTeam() {
   const [teamName, setTeamName] = useState<string>("")

@@ -1,5 +1,5 @@
 import { InvitationForm } from "../ui/InvitationForm"
-import { AuthSetupInfo } from "../context/types"
+import { AuthSetupInfo } from "../auth/types"
 import { useLocalState } from "~/hooks/useLocalState"
 
 export default function JoinTeam() {
