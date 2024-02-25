@@ -6,7 +6,7 @@ import { useSelectedWeek } from "hooks/useSelectedWeek"
 import { DoneData } from "types"
 import { Avatar } from "ui/Avatar"
 
-export function TeamDones() {
+export default function TeamDones() {
   const { start, end } = useSelectedWeek()
 
   const { forDateRange } = useDones()

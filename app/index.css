@@ -70,3 +70,7 @@ h4 {
 .textbox-auth {
   @apply rounded-md font-bold border py-1 px-3;
 }
+
+.active {
+  @apply bg-primary-100 border-black;
+}

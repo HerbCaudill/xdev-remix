@@ -1,7 +1,9 @@
-import { WeekNav } from "dones/components/WeekNav"
 import { DonesNav } from "dones/components/DonesNav"
+import { WeekNav } from "dones/components/WeekNav"
+import { useRedirect } from "lib/useRedirect"
 
 export default function Dones({ children }: { children: React.ReactNode }) {
+  useRedirect({ from: "/dones", to: "/dones/me" })
   return (
     <>
       {/* top navigation */}

@@ -31,6 +31,7 @@ declare global {
   const getShareId: typeof import('@localfirst/auth-provider-automerge-repo')['getShareId']
   const lazy: typeof import('react')['lazy']
   const memo: typeof import('react')['memo']
+  const redirect: typeof import('@remix-run/react')['redirect']
   const startTransition: typeof import('react')['startTransition']
   const useCallback: typeof import('react')['useCallback']
   const useContext: typeof import('react')['useContext']

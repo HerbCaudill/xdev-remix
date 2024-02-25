@@ -1,3 +1,4 @@
+import { flatRoutes } from "remix-flat-routes"
 import { vitePlugin as remix } from "@remix-run/dev"
 import autoImport from "unplugin-auto-import/vite"
 import { Options as AutoImportOptions } from "unplugin-auto-import/dist/types.d.ts"
@@ -46,7 +47,15 @@ const autoImportOptions: AutoImportOptions = {
       classnames: [["default", "cx"]],
       "@localfirst/auth": [["*", "Auth"]],
       "@automerge/automerge-repo": ["Repo"],
-      "@remix-run/react": ["useParams", "useNavigate", "useLocation", "Outlet", "Link", "NavLink"],
+      "@remix-run/react": [
+        "useParams",
+        "useNavigate",
+        "useLocation",
+        "Outlet",
+        "Link",
+        "NavLink",
+        "redirect",
+      ],
       "@localfirst/auth-provider-automerge-repo": ["AuthProvider", "getShareId"],
       "@headlessui/react": [["*", "Headless"]],
     },
@@ -75,7 +84,14 @@ const autoImportOptions: AutoImportOptions = {
 
 export default defineConfig({
   plugins: [
-    remix({ ssr: false }), // SPA mode
+    remix({
+      ssr: false, // SPA mode
+      ignoredRouteFiles: ["**/*"],
+      routes: async defineRoutes =>
+        flatRoutes("routes", defineRoutes, {
+          // ignoredRouteFiles: ["**/lib/*", "**/components/*", "**/ui/*"],
+        }),
+    }),
     tsconfigPaths(),
     wasm(),
     topLevelAwait(),

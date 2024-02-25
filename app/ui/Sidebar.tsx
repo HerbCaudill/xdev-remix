@@ -8,7 +8,7 @@ export function Sidebar() {
   if (self === undefined) return <Loading />
 
   const navigation: NavItem[] = [
-    { name: "Dones", to: "/dones", icon: IconDiscountCheck },
+    { name: "Dones", to: "/dones/me", icon: IconDiscountCheck },
     { name: "Cadence", to: "/cadence", icon: IconRun },
     { name: "Hours", to: "/hours", icon: IconCalendarSmile },
     { name: "Weekly", to: "/weekly", icon: IconListCheck },
