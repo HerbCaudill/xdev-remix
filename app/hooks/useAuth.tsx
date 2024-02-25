@@ -1,4 +1,4 @@
-import { AuthContext } from "auth/AuthContext"
+import { AuthContext } from "auth/AuthContextProvider"
 
 // Convenience wrapper around our authContext for accessing the auth data and provider
 export const useAuth = () => {

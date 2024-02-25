@@ -3,7 +3,6 @@ import { useLocalState } from "hooks/useLocalState"
 export default function SignOut() {
   const { updateLocalState } = useLocalState()
   const [showWarning, setShowWarning] = useState(true)
-  const navigate = useNavigate()
 
   const signOut = () => {
     setShowWarning(false)

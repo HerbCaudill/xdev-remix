@@ -1,5 +1,5 @@
 import { useLocalState } from "hooks/useLocalState"
-import { NoPasswordManager } from "ui/NoPasswordManager"
+import { Munge } from "ui/Munge"
 
 export default function UserName() {
   const { updateLocalState } = useLocalState()
@@ -16,7 +16,7 @@ export default function UserName() {
   return (
     <form className={cx(["flex flex-col space-y-4 p-4"])} onSubmit={onSubmit} autoComplete="off">
       <p className="text-center">
-        <NoPasswordManager>Enter your first name to get started:</NoPasswordManager>
+        <Munge>Enter your first name to get started:</Munge>
       </p>
       <div
         className={cx([

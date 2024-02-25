@@ -3,12 +3,12 @@ import { RepoContext } from "@automerge/automerge-repo-react-hooks"
 import { type AuthProvider } from "@localfirst/auth-provider-automerge-repo"
 import { type Location } from "@remix-run/react"
 import { useLocalState } from "hooks/useLocalState"
-import { getRootDocumentIdFromTeam } from "lib/getRootDocumentIdFromTeam"
-import { initializeAuthRepo } from "lib/initializeAuthRepo"
+import { getRootDocumentIdFromTeam } from "auth/getRootDocumentIdFromTeam"
+import { initializeAuthRepo } from "auth/initializeAuthRepo"
 import { Loading } from "ui/Loading"
-import { AuthContext } from "./AuthContext"
 import { setupAuth } from "./setupAuth"
 import { AuthSetupInfo } from "./types"
+import { AuthState } from "types"
 
 export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate()
@@ -58,3 +58,5 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
     )
   } else return <Loading />
 }
+
+export const AuthContext = createContext<AuthState | undefined>(undefined)

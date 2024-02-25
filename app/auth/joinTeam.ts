@@ -1,7 +1,7 @@
-import { createDevice } from "lib/createDevice"
+import { createDevice } from "auth/createDevice"
 import { SetupResult, JoinTeamInfo } from "./types"
-import { initializeAuthRepo } from "lib/initializeAuthRepo"
-import { parseInvitationCode } from "lib/parseInvitationCode"
+import { initializeAuthRepo } from "auth/initializeAuthRepo"
+import { parseInvitationCode } from "auth/parseInvitationCode"
 import { eventPromise } from "lib/eventPromise"
 
 export const joinTeam = async ({

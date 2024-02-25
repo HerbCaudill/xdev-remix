@@ -1,6 +1,6 @@
 import { AuthSetupInfo } from "auth/types"
 import { useLocalState } from "hooks/useLocalState"
-import { InvitationForm } from "ui/InvitationForm"
+import { InvitationForm } from "auth/InvitationForm"
 
 export default function JoinTeam() {
   const { userName } = useLocalState()

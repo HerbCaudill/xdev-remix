@@ -1,7 +1,7 @@
 import { BrowserWebSocketClientAdapter } from "@automerge/automerge-repo-network-websocket"
 import { IndexedDBStorageAdapter } from "@automerge/automerge-repo-storage-indexeddb"
-import { url } from "./getSyncServer.client"
-import { eventPromise } from "./eventPromise"
+import { url } from "./getSyncServer"
+import { eventPromise } from "../lib/eventPromise"
 
 export async function createRepoWithAuth(user: UserWithSecrets, device: DeviceWithSecrets) {
   const storage = new IndexedDBStorageAdapter()
