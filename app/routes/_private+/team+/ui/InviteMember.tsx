@@ -1,0 +1,73 @@
+import { randomKey } from "@localfirst/crypto"
+import type { UnixTimestamp } from "@localfirst/auth"
+import { useDocument } from "@automerge/automerge-repo-react-hooks"
+import { useTeam } from "routes/auth+/hooks/useTeam"
+import { Contact } from "types"
+import { HOUR } from "lib/constants"
+import { Dialog } from "ui/Dialog"
+import { CopyCode } from "./CopyCode"
+
+export const InviteMember = ({ userId }: { userId: string }) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [invitationCode, setInvitationCode] = useState<string>()
+  const { contactMap, team, self } = useTeam()
+  const contactDocumentId = contactMap[userId]?.documentId as DocumentId
+  const [contactDoc, changeContactDoc] = useDocument<Contact>(contactDocumentId)
+
+  const { firstName, lastName } = contactDoc ?? {}
+
+  // ----- ↑ hooks
+
+  // Only admins can invite new members
+  if (!self?.isAdmin) return null
+
+  const onCancel = () => setIsOpen(false)
+
+  const inviteMember = () => {
+    const seed = randomKey(4)
+
+    // Create an invitation that expires in 48 hours and can only be used once
+    const expiration = (Date.now() + 48 * HOUR) as UnixTimestamp
+    const maxUses = 1
+    const { id } = team.inviteMember({ seed, expiration, maxUses })
+
+    // Record the invitation on the contact's document
+    changeContactDoc(s => (s.invitationId = id))
+
+    // The "invitation code" that we give the member is the shareId + the invitation seed
+    const shareId = getShareId(team)
+    setInvitationCode(`${shareId}${seed}`)
+  }
+
+  return (
+    <>
+      <button
+        className="button button-primary button-xs"
+        onClick={() => {
+          setIsOpen(true)
+          inviteMember()
+        }}
+      >
+        Invite
+      </button>
+      <Dialog
+        isOpen={isOpen}
+        title={`Invite member`}
+        onClose={onCancel}
+        children={
+          <div className="flex flex-col space-y-4">
+            <p>Copy this code and send it to {firstName}.</p>
+            <CopyCode code={invitationCode!} />
+          </div>
+        }
+        buttons={
+          <>
+            <button onClick={onCancel} color="primary">
+              Done
+            </button>
+          </>
+        }
+      />
+    </>
+  )
+}
