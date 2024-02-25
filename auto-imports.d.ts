@@ -6,6 +6,8 @@
 export {}
 declare global {
   const Auth: typeof import('@localfirst/auth')
+  const AuthContext: typeof import('./app/context/AuthContext')['AuthContext']
+  const AuthContextProvider: typeof import('./app/context/AuthContextProvider')['AuthContextProvider']
   const AuthProvider: typeof import('@localfirst/auth-provider-automerge-repo')['AuthProvider']
   const Avatar: typeof import('./app/ui/Avatar')['Avatar']
   const CONTACTS: typeof import('./app/contacts')['CONTACTS']
@@ -52,11 +54,13 @@ declare global {
   const Spinner: typeof import('./app/ui/Spinner')['Spinner']
   const WEEK: typeof import('./app/lib/constants')['WEEK']
   const assert: typeof import('./app/lib/assert')['assert']
+  const authorizeDevice: typeof import('./app/context/authorizeDevice')['authorizeDevice']
   const by: typeof import('./app/lib/by')['by']
   const createContext: typeof import('react')['createContext']
   const createDevice: typeof import('./app/lib/createDevice')['createDevice']
   const createRef: typeof import('react')['createRef']
   const createRepoWithAuth: typeof import('./app/lib/createRepoWithAuth')['createRepoWithAuth']
+  const createTeam: typeof import('./app/context/createTeam')['createTeam']
   const currentWeek: typeof import('./app/lib/currentWeek')['currentWeek']
   const cx: typeof import('classnames')['default']
   const db: typeof import('./app/db/db')['db']
@@ -77,6 +81,7 @@ declare global {
   const getWeek: typeof import('./app/lib/getWeek')['getWeek']
   const host: typeof import('./app/lib/getSyncServer.client')['host']
   const initializeAuthRepo: typeof import('./app/lib/initializeAuthRepo')['initializeAuthRepo']
+  const joinTeam: typeof import('./app/context/joinTeam')['joinTeam']
   const lazy: typeof import('react')['lazy']
   const likesDescription: typeof import('./app/lib/likesDescription')['likesDescription']
   const mapAsync: typeof import('./app/lib/mapAsync')['mapAsync']
@@ -89,6 +94,7 @@ declare global {
   const range: typeof import('./app/lib/range')['range']
   const root: typeof import('./app/root')['default']
   const server: typeof import('./app/lib/getSyncServer.client')['server']
+  const setupAuth: typeof import('./app/context/setupAuth')['setupAuth']
   const startTransition: typeof import('react')['startTransition']
   const storeRootDocumentIdOnTeam: typeof import('./app/lib/storeRootDocumentIdOnTeam')['storeRootDocumentIdOnTeam']
   const url: typeof import('./app/lib/getSyncServer.client')['url']

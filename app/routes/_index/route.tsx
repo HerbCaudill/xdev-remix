@@ -1,4 +1,4 @@
-import { AuthContextProvider } from "../../context/AuthContextProvider"
+import { AuthContextProvider } from "~/context/AuthContextProvider"
 import { Sidebar } from "./Sidebar"
 
 export default function Index() {
