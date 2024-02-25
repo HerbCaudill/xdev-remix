@@ -2,6 +2,7 @@ import { type Repo } from "@automerge/automerge-repo"
 import { RepoContext } from "@automerge/automerge-repo-react-hooks"
 import { type AuthProvider } from "@localfirst/auth-provider-automerge-repo"
 import { type Location } from "@remix-run/react"
+import { AuthContext } from "./AuthContext"
 import { setupAuth } from "./setupAuth"
 import { AuthSetupInfo } from "./types"
 

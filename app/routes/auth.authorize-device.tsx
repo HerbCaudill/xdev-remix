@@ -1,5 +1,5 @@
 import { InvitationForm } from "../ui/InvitationForm"
-import { AuthSetupInfo } from "./_index/auth/types"
+import { AuthSetupInfo } from "../context/types"
 
 export default function AuthorizeDevice() {
   const { userName } = useLocalState()
