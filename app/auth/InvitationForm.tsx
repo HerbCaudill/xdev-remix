@@ -1,8 +1,7 @@
-export const InvitationForm = ({ heading, onSubmit }: Props) => {
+export function InvitationForm({ heading, onSubmit }: Props) {
   const [invitationCode, setInvitationCode] = useState<string>("")
 
   // hooks ↑
-
   return (
     <form
       className={cx(["flex flex-col space-y-4 p-4"])}

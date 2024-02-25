@@ -1,11 +1,11 @@
-export const Dialog = ({
+export function Dialog({
   isOpen,
   title,
   onClose = () => {},
   children,
   buttons,
   initialFocus,
-}: Props) => {
+}: Props) {
   return (
     <Headless.Transition.Root show={isOpen} as={Fragment}>
       <Headless.Dialog

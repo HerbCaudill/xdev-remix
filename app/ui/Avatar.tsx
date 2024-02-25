@@ -1,6 +1,6 @@
 import { useTeam } from "auth/useTeam"
 
-export const Avatar = ({ className = "", size = "md", userId }: Props) => {
+export function Avatar({ className = "", size = "md", userId }: Props) {
   const { getContact } = useTeam()
   const contact = getContact(userId)
   if (!contact) return null

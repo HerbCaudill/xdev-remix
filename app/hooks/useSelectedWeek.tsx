@@ -1,7 +1,7 @@
 import { LocalDate } from "@js-joda/core"
 import { getWeek } from "lib/getWeek"
 
-export const useSelectedWeek = () => {
+export function useSelectedWeek() {
   const { date: dateString } = useParams()
   const today = LocalDate.now()
   const date = dateString ? LocalDate.parse(dateString) : today

@@ -25,7 +25,7 @@ import { AuthState } from "types"
  * (C) This is the very first load on first use. In this case, we need to start the auth flow by
  *     redirecting to another route.
  */
-export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
+export function AuthContextProvider({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate()
 
   // Persisted state
@@ -63,7 +63,6 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
   }, [])
 
   // hooks ↑
-
   if (device && user && state) {
     const { team, auth, repo } = state
     return (

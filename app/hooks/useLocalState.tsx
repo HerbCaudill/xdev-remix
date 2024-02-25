@@ -1,7 +1,7 @@
 import { useLocalStorage } from "@uidotdev/usehooks"
 import { LocalState } from "types"
 
-export const useLocalState = () => {
+export function useLocalState() {
   const initialState: LocalState = {}
   const [state, setState] = useLocalStorage("xdev-localstate", initialState)
 

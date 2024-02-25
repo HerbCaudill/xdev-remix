@@ -5,7 +5,7 @@ import { useAuth } from "../auth/useAuth"
 import { useRootDocument } from "../hooks/useRootDocument"
 import { PartialDoneData, DoneData, Timestamp, SharedState, ExtendedArray } from "types"
 
-export const useDones = () => {
+export function useDones() {
   const repo = useRepo()
   const db = useDb()
   const { user } = useAuth()
@@ -16,7 +16,6 @@ export const useDones = () => {
 
   // READ
   // these return dexie queries to be used with useLiveQuery
-
   /** Returns all dones we know about  */
   const all = async () => {
     return db.dones.toArray()
@@ -30,7 +29,6 @@ export const useDones = () => {
   }
 
   // WRITE
-
   /** Adds a done for a specified user */
   const add = ({ content, date, userId, likes = [] }: PartialDoneData) => {
     const handle = repo.create<DoneData>()

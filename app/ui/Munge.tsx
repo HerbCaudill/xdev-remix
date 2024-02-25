@@ -2,7 +2,7 @@
  * Intersperses zero-width spaces in certain words to make them illegible to password managers like
  * 1Password. This is probably terrible for screen readers...
  */
-export const Munge = ({ children }: { children: string }) => {
+export function Munge({ children }: { children: string }) {
   const magicWords = ["name", "email", "address", "phone", "password", "code"]
   return <span dangerouslySetInnerHTML={{ __html: munge(children, magicWords) }} />
 }

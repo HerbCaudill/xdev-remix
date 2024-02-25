@@ -7,7 +7,7 @@ export type DoneLookup = Record<DocumentId, DoneData>
 
 export const DbContext = createContext(db)
 
-export const DbProvider = ({ children }: Props) => {
+export function DbProvider({ children }: Props) {
   const repo = useRepo()
   // `state` is our shared state. `state.dones` is a list of ids
   const [state] = useRootDocument()

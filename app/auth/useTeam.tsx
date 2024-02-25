@@ -5,7 +5,7 @@ import { useLocalState } from "../hooks/useLocalState"
 import { by } from "lib/by"
 import { Contact } from "types"
 
-export const useTeam = () => {
+export function useTeam() {
   const { user, team, auth } = useAuth()
   const [rootDoc] = useRootDocument()
   const { signOut: _signOut } = useLocalState()

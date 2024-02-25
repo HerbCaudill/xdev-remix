@@ -3,7 +3,7 @@ import { NavItem } from "types"
 import { Avatar } from "ui/Avatar"
 import { Loading } from "ui/Loading"
 
-export const Sidebar = () => {
+export function Sidebar() {
   const { self } = useTeam()
   if (self === undefined) return <Loading />
 
