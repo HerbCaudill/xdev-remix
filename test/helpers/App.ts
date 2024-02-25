@@ -1,9 +1,5 @@
-import { pause } from "../../src/util/pause"
-import {
-  type BrowserContext,
-  type ConsoleMessage,
-  type Page,
-} from "@playwright/test"
+import { pause } from "../../app/lib/pause"
+import { type BrowserContext, type ConsoleMessage, type Page } from "@playwright/test"
 import { expect } from "./expect"
 
 export const newBrowser = async (context: BrowserContext) => {
@@ -23,9 +19,7 @@ export class App {
   // GENERAL
 
   log(msg: ConsoleMessage) {
-    const text: string = msg
-      .text()
-      .replace(/(color: #([0-9A-F]{6}))|(color: inherit)|%c/g, "")
+    const text: string = msg.text().replace(/(color: #([0-9A-F]{6}))|(color: inherit)|%c/g, "")
     console.log(text)
   }
 
@@ -38,9 +32,7 @@ export class App {
       this.page.on("console", msg => this.log(msg))
 
       // enable debug logging
-      await this.page.evaluate(
-        `window.localStorage.setItem('debug', '${debug}')`
-      )
+      await this.page.evaluate(`window.localStorage.setItem('debug', '${debug}')`)
       // reload so these take effect
       await pause(500)
       await this.page.reload()

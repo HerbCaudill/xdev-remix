@@ -1,5 +1,6 @@
 import { AuthContextProvider } from "auth/AuthContextProvider"
-import { Sidebar } from "./Sidebar"
+import { Backdrop } from "ui/Backdrop"
+import { Sidebar } from "ui/Sidebar"
 import { Fade } from "ui/transitions/Fade"
 import { Slide } from "ui/transitions/Slide"
 
@@ -70,8 +71,4 @@ export default function Index() {
       </div>
     </AuthContextProvider>
   )
-}
-
-const Backdrop = () => {
-  return <div className="fixed inset-0 bg-gray-900/80" />
 }

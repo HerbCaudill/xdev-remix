@@ -1,16 +1,9 @@
-// import { useTeam } from "hooks/useTeam"
+import { useTeam } from "hooks/useTeam"
 
 export const Avatar = ({ className = "", size = "md", userId }: Props) => {
-  // const { getContact } = useTeam()
-  // const contact = getContact(userId)
-  // if (!contact) return null
-  const contact = {
-    userId: "herb",
-    firstName: "Herb",
-    lastName: "Caudill",
-    avatarUrl: "https://www.devresults.com/images/staff/square/herb.jpg",
-    fullName: "Herb Caudill",
-  }
+  const { getContact } = useTeam()
+  const contact = getContact(userId)
+  if (!contact) return null
 
   return (
     <span

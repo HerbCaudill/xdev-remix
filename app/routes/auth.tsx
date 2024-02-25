@@ -7,7 +7,3 @@ export default function Auth() {
     </div>
   )
 }
-
-type Props = {
-  children: React.ReactNode
-}
