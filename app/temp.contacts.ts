@@ -1,5 +1,7 @@
 import type { Contact } from "types"
 
+// TODO: These will be replaced with contact information that people can edit
+
 export const CONTACTS: Contact[] = [
   {
     userId: "herb",
