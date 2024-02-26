@@ -1,11 +1,11 @@
 import { AuthContextProvider } from "routes/auth+/lib/AuthContextProvider"
 import { Backdrop } from "ui/Backdrop"
-import { Error } from "ui/Error"
+import { ErrorScreen } from "ui/ErrorScreen"
 import { Sidebar } from "ui/Sidebar"
 import { Fade } from "ui/transitions/Fade"
 import { Slide } from "ui/transitions/Slide"
 
-export default function PrivateLayout() {
+export default function Private() {
   return (
     <Layout>
       <Outlet />
@@ -17,10 +17,10 @@ function Layout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const ShowSidebarButton = () => (
-    <div className="absolute top-0 z-40 flex items-center h-12 w-12 pl-4 lg:hidden border-r">
+    <div className="absolute top-0 z-40 flex h-12 w-12 items-center border-r pl-4 lg:hidden">
       <button
         type="button"
-        className="text-gray-700"
+        className="text-neutral-700"
         title="Open sidebar"
         onClick={() => setSidebarOpen(true)}
       >
@@ -45,9 +45,7 @@ function Layout({ children }: { children: React.ReactNode }) {
         {/* slideout sidebar */}
         <Headless.Transition.Root show={sidebarOpen} as={Fragment}>
           <Headless.Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
-            <Fade>
-              <Backdrop />
-            </Fade>
+            <Backdrop />
             <div className="fixed inset-0 flex">
               <Slide>
                 {/* sidebar container */}
@@ -74,7 +72,7 @@ function Layout({ children }: { children: React.ReactNode }) {
         <ShowSidebarButton />
 
         {/* page */}
-        <main className={`lg:pl-[12em] h-screen w-full flex flex-col gap-2 pb-2`}>{children}</main>
+        <main className={`flex h-screen w-full flex-col gap-2 pb-2 lg:pl-[12em]`}>{children}</main>
       </div>
     </AuthContextProvider>
   )
@@ -82,7 +80,7 @@ function Layout({ children }: { children: React.ReactNode }) {
 export function ErrorBoundary() {
   return (
     <Layout>
-      <Error />
+      <ErrorScreen />
     </Layout>
   )
 }

@@ -1,5 +1,6 @@
 import { AuthSetupInfo } from "routes/auth+/lib/types"
 import { useLocalState } from "hooks/useLocalState"
+import { button } from "ui/cva/button"
 
 export default function CreateTeam() {
   const [teamName, setTeamName] = useState<string>("DevResults")
@@ -28,7 +29,7 @@ export default function CreateTeam() {
         navigate("/", { state: setupInfo })
       }}
     >
-      <h3 className="font-bold text-lg">Create a team</h3>
+      <h3 className="text-lg font-bold">Create a team</h3>
       <p>
         <label htmlFor="teamName">Enter a name for your team:</label>
       </p>
@@ -43,7 +44,10 @@ export default function CreateTeam() {
           value={teamName}
           onChange={e => setTeamName(e.target.value)}
         />
-        <button type="submit" className="button button-sm button-primary justify-center">
+        <button
+          type="submit"
+          className={cx(button({ color: "primary" }), "justify-center sm:justify-stretch")}
+        >
           Create team
         </button>
       </div>

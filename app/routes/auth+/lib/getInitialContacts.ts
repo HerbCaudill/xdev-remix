@@ -1,5 +1,5 @@
 import { CONTACTS } from "temp.contacts"
-import { Contact } from "types"
+import { Contact } from "types/types"
 
 export const getInitialContacts = (user: User, teamName: string): Contact[] => {
   // HACK: For now, we're going to load the list of DevResults users from a hard-coded list. We'll

@@ -1,7 +1,7 @@
 import { useDocument } from "@automerge/automerge-repo-react-hooks"
 import { Likes } from "./Likes"
 import { useAuth } from "routes/auth+/hooks/useAuth"
-import { DoneData } from "types"
+import { DoneData } from "types/types"
 
 export function DoneDisplay({ className = "", doneId }: Props) {
   const { user } = useAuth()

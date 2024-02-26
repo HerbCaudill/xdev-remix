@@ -3,7 +3,7 @@ export function Spinner({ size = 14 }: Props = {}) {
     <span
       className={cx(
         `inline-block px-1 animate-spin rounded-full`,
-        `border-solid border-black border-r-gray-200`,
+        `border-solid border-black border-r-neutral-200`,
       )}
       style={{
         height: size,

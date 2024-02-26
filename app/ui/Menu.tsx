@@ -4,7 +4,7 @@ export default function Menu({ button, buttonStyles, header, items }: Props) {
       <Headless.Menu.Button className={buttonStyles}>{button}</Headless.Menu.Button>
 
       <Headless.Menu.Items
-        className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+        className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-neutral-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
         unmount={false}
       >
         {header && <div className="px-4 py-3">{header} </div>}
@@ -15,7 +15,7 @@ export default function Menu({ button, buttonStyles, header, items }: Props) {
                 <span
                   className={cx(
                     "MenuItem block",
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                    active ? "bg-neutral-100 text-neutral-900" : "text-neutral-700",
                   )}
                 >
                   {item}

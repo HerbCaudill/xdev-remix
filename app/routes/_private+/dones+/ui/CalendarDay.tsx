@@ -1,7 +1,7 @@
 import { LocalDate } from "@js-joda/core"
 import { useDones } from "routes/_private+/dones+/hooks/useDones"
 import { DAY_OF_MONTH, DAY_OF_WEEK, formatDate } from "lib/formatDate"
-import { DoneData } from "types"
+import { DoneData } from "types/types"
 import { DoneEditable } from "./DoneEditable"
 import { DoneInput } from "./DoneInput"
 
@@ -23,26 +23,26 @@ export const CalendarDay = ({ date, dones }: Props) => {
     <>
       <h2
         className={cx([
-          "items-center text-center p-2 tracking-tight",
+          "items-center p-2 text-center tracking-tight",
           // mobile: dark line to right, day & date horizontal
-          "flex border-r border-r-black border-b ",
+          "flex border-b border-r border-r-black ",
           // desktop: dark line below, day & date vertical
           "sm:flex-col sm:border-r-0  sm:border-b-black",
         ])}
       >
-        <span className="block flex-1 text-xs font-normal uppercase p-1 text-gray-500">
+        <span className="block flex-1 p-1 text-xs font-normal uppercase text-neutral-500">
           {formatDate(date, DAY_OF_WEEK)}
         </span>
         <span
           className={cx([
-            "flex justify-center items-center text-xl font-semibold aspect-square rounded-full w-10 text-black-900",
-            { "text-white bg-primary-500": isToday },
+            "text-black-900 flex aspect-square w-10 items-center justify-center rounded-full font-serif text-xl font-extrabold",
+            { "bg-primary-500 text-white": isToday },
           ])}
         >
           {formatDate(date, DAY_OF_MONTH)}
         </span>
       </h2>
-      <ul className="flex flex-col p-2 divide-y border-b">
+      <ul className="flex flex-col divide-y border-b p-2">
         {/* existing dones */}
         {dones.map(({ id }, index) => (
           <li key={id}>
@@ -57,7 +57,7 @@ export const CalendarDay = ({ date, dones }: Props) => {
           </li>
         ))}
         {/* new done */}
-        <li className="focus-within:border-b py-1">
+        <li className="py-1 focus-within:border-b">
           <DoneInput
             key={dones.length} // this way we get a new instance after adding a done
             content=""

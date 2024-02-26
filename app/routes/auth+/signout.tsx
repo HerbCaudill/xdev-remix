@@ -1,4 +1,5 @@
 import { useLocalState } from "hooks/useLocalState"
+import { button } from "ui/cva/button"
 
 export default function SignOut() {
   const { shareId, signOut } = useLocalState()
@@ -28,7 +29,7 @@ export default function SignOut() {
               <h3 className="text-lg font-bold text-danger-700">Are you sure?</h3>
             </div>
           </div>
-          <div className="flex flex-col gap-2 mt-2 text-red-700">
+          <div className="mt-2 flex flex-col gap-2 text-red-700">
             <p>All team data will be removed from this device.</p>
             <p>
               If you want to use XDev again on this device, you'll need to reauthorize it from
@@ -37,21 +38,21 @@ export default function SignOut() {
           </div>
         </div>
 
-        <div className="flex gap-2 mt-4">
-          <Link className="button button-md button-white" to="/">
+        <div className="mt-4 flex gap-2">
+          <Link className={button({ size: "md" })} to="/">
             No, go back
           </Link>
           <span className="grow" />
-          <button className="button button-md button-danger" onClick={onConfirm}>
+          <button className={button({ size: "md", color: "danger" })} onClick={onConfirm}>
             Yes, sign out
           </button>
         </div>
       </div>
     : <div className="flex flex-col items-center gap-4 ">
-        <span className="text-4xl p-4">👋</span>
+        <span className="p-4 text-4xl">👋</span>
         <p>You've been signed out.</p>
         <p>
-          <a href="/" className="button button-md button-primary">
+          <a href="/" className={button({ size: "md", color: "primary" })}>
             Sign in again
           </a>
         </p>

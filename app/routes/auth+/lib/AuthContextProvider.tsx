@@ -8,7 +8,7 @@ import { initializeAuthRepo } from "routes/auth+/lib/initializeAuthRepo"
 import { Loading } from "ui/Loading"
 import { setupAuth } from "./setupAuth"
 import { AuthSetupInfo } from "./types"
-import { AuthState } from "types"
+import { AuthState } from "types/types"
 import { assert } from "lib/assert"
 
 /**

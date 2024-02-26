@@ -1,7 +1,7 @@
 import { useDocument } from "@automerge/automerge-repo-react-hooks"
 import { useLocalState } from "./useLocalState"
 import { assert } from "lib/assert"
-import { SharedState } from "types"
+import { SharedState } from "types/types"
 
 export function useRootDocument() {
   const { rootDocumentId } = useLocalState()

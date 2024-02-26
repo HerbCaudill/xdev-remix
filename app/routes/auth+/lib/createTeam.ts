@@ -3,7 +3,7 @@ import { SetupResult, CreateTeamInfo } from "./types"
 import { initializeAuthRepo } from "routes/auth+/lib/initializeAuthRepo"
 import { getInitialContacts } from "routes/auth+/lib/getInitialContacts"
 import { storeRootDocumentIdOnTeam } from "routes/auth+/lib/storeRootDocumentIdOnTeam"
-import { Contact, SharedState } from "types"
+import { Contact, SharedState } from "types/types"
 
 export const createTeam = async ({ userName, teamName }: CreateTeamInfo): Promise<SetupResult> => {
   // Create new user and device

@@ -3,6 +3,8 @@ import { useNavigationHotkey } from "hooks/useNavigationHotkey"
 import { useSelectedWeek } from "hooks/useSelectedWeek"
 import { formatDateRange } from "lib/formatDateRange"
 import { getSunday } from "lib/getSunday"
+import { twMerge } from "tailwind-merge"
+import { button } from "ui/cva/button"
 
 export const WeekNav = () => {
   const week = useSelectedWeek()
@@ -20,30 +22,36 @@ export const WeekNav = () => {
   useNavigationHotkey("p,j,pageup", prev)
   useNavigationHotkey("n,k,pagedown", next)
 
+  const buttonStyle = twMerge(button(), "px-4")
   return (
-    <div className="flex flex-row my-2 gap-1 items-center">
+    <div className="flex flex-row my-2 gap-2 items-stretch">
       <NavLink
-        className="button button-xs button-white"
-        title="Today (t)"
-        relative="path"
-        to={current}
-        children="Today"
-      />
-      <NavLink
-        className="button button-xs button-white"
+        className={buttonStyle}
         title="Previous week (p)"
         relative="path"
         to={prev}
-        children="<"
+        children={<IconCaretLeftFilled className="size-4" />}
       />
       <NavLink
-        className="button button-xs button-white"
-        title="Next week (n)"
+        className={buttonStyle}
+        title="Today (t)"
+        relative="path"
+        to={current}
+        children={
+          <>
+            <IconCalendarDue className="size-4" />
+            <span>Today</span>
+          </>
+        }
+      />
+      <NavLink
+        className={buttonStyle}
+        title="Next week (n)" //
         relative="path"
         to={next}
-        children=">"
+        children={<IconCaretRightFilled className="size-4" />}
       />
-      <span className="mx-2 text-2xl font-medium">{formatDateRange(start, end)}</span>
+      <span className="mx-2 text-xl tracking-tight font-serif">{formatDateRange(start, end)}</span>
     </div>
   )
 }

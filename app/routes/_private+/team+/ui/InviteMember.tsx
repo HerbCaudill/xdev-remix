@@ -2,13 +2,14 @@ import { randomKey } from "@localfirst/crypto"
 import type { UnixTimestamp } from "@localfirst/auth"
 import { useDocument } from "@automerge/automerge-repo-react-hooks"
 import { useTeam } from "routes/auth+/hooks/useTeam"
-import { Contact } from "types"
+import { Contact } from "types/types"
 import { HOUR } from "lib/constants"
 import { Dialog } from "ui/Dialog"
 import { CopyCode } from "./CopyCode"
+import { button } from "../../../../ui/cva/button"
 
 export const InviteMember = ({ userId }: { userId: string }) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const navigate = useNavigate()
   const [invitationCode, setInvitationCode] = useState<string>()
   const { contactMap, team, self } = useTeam()
   const contactDocumentId = contactMap[userId]?.documentId as DocumentId
@@ -20,8 +21,6 @@ export const InviteMember = ({ userId }: { userId: string }) => {
 
   // Only admins can invite new members
   if (!self?.isAdmin) return null
-
-  const onCancel = () => setIsOpen(false)
 
   const inviteMember = () => {
     const seed = randomKey(4)
@@ -39,35 +38,27 @@ export const InviteMember = ({ userId }: { userId: string }) => {
     setInvitationCode(`${shareId}${seed}`)
   }
 
+  const onCancel = () => {
+    navigate("..")
+  }
   return (
-    <>
-      <button
-        className="button button-primary button-xs"
-        onClick={() => {
-          setIsOpen(true)
-          inviteMember()
-        }}
-      >
-        Invite
-      </button>
-      <Dialog
-        isOpen={isOpen}
-        title={`Invite member`}
-        onClose={onCancel}
-        children={
-          <div className="flex flex-col space-y-4">
-            <p>Copy this code and send it to {firstName}.</p>
-            <CopyCode code={invitationCode!} />
-          </div>
-        }
-        buttons={
-          <>
-            <button onClick={onCancel} color="primary">
-              Done
-            </button>
-          </>
-        }
-      />
-    </>
+    <Dialog
+      isOpen={true}
+      title={`Invite member`}
+      onClose={onCancel}
+      children={
+        <div className="flex flex-col space-y-4">
+          <p>Copy this code and send it to {firstName}.</p>
+          <CopyCode code={invitationCode!} />
+        </div>
+      }
+      buttons={
+        <>
+          <button onClick={onCancel} color="primary">
+            Done
+          </button>
+        </>
+      }
+    />
   )
 }

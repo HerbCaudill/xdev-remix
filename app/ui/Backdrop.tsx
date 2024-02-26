@@ -1,3 +1,9 @@
+import { Fade } from "./transitions/Fade"
+
 export function Backdrop() {
-  return <div className="fixed inset-0 bg-gray-900/80" />
+  return (
+    <Fade>
+      <div className="fixed inset-0 bg-neutral-900/80" />
+    </Fade>
+  )
 }

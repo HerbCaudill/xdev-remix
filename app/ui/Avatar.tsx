@@ -9,8 +9,8 @@ export function Avatar({ className = "", size = "md", userId }: Props) {
     <span
       title={contact.fullName}
       className={cx(
-        "inline-block rounded-full border border-white overflow-hidden",
-        "bg-gray-500 text-white font-extrabold flex content-center justify-center items-center",
+        "rounded-full border border-white overflow-hidden",
+        "bg-neutral-500 text-white font-extrabold flex content-center justify-center items-center",
         sizeStyles[size],
         className,
       )}

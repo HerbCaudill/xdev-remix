@@ -1,7 +1,7 @@
 import { type AutomergeUrl } from "@automerge/automerge-repo"
 import { useDocument } from "@automerge/automerge-repo-react-hooks"
 import { useDones } from "routes/_private+/dones+/hooks/useDones"
-import { DoneData } from "types"
+import { DoneData } from "types/types"
 import { DeleteButton } from "ui/DeleteButton"
 import { DoneInput, type Props as InputProps } from "./DoneInput"
 import { Likes } from "./Likes"
@@ -18,7 +18,7 @@ export const DoneEditable = ({ id, ...passthruProps }: Props) => {
   }
 
   return (
-    <span className="block relative group py-1">
+    <span className="group relative block py-1">
       <DoneInput
         content={content}
         {...passthruProps}
@@ -30,7 +30,7 @@ export const DoneEditable = ({ id, ...passthruProps }: Props) => {
         }}
       />
       <Likes likes={likes} />
-      <span className="absolute right-0 top-0 opacity-5 group-hover:opacity-100 focus:opacity-100 ">
+      <span className="absolute right-0 top-0 opacity-5 focus:opacity-100 group-hover:opacity-100 ">
         <DeleteButton onDestroy={onDestroy} />
       </span>
     </span>

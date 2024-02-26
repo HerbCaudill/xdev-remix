@@ -2,7 +2,7 @@ import { Dialog } from "ui/Dialog"
 import { LocalDate } from "@js-joda/core"
 import { useTeam } from "routes/auth+/hooks/useTeam"
 import { useDones } from "routes/_private+/dones+/hooks/useDones"
-import { DoneData } from "types"
+import { DoneData } from "types/types"
 import { parse } from "csv-parse/sync"
 
 export const DoneImporter = () => {
@@ -81,7 +81,7 @@ export const DoneImporter = () => {
         children={
           <div className="flex flex-col space-y-4">
             <textarea
-              className="p-2 block border text-xs font-mono"
+              className="block border p-2 font-mono text-xs"
               value={importData}
               onChange={onImportDataChange}
               rows={20}

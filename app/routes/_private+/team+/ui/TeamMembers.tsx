@@ -2,6 +2,7 @@ import * as Auth from "@localfirst/auth"
 import cx from "classnames"
 import { InviteMember } from "./InviteMember"
 import { useTeam } from "routes/auth+/hooks/useTeam"
+import { button } from "ui/cva/button"
 
 export const TeamMembers = () => {
   const { contacts, team, self } = useTeam()
@@ -13,18 +14,31 @@ export const TeamMembers = () => {
     return "PENDING"
   }
 
+  const adminIcon = <IconCircleKey className="size-6 text-primary-500" />
   return (
     <>
-      <table className="MemberTable w-full border-collapse text-sm my-3">
+      <table className="my-3 w-full max-w-xl text-sm">
+        <thead>
+          <tr className="border-b border-black text-xs uppercase text-neutral-700 *:p-2 *:font-normal">
+            <th>Admin</th>
+            <th className="w-1/2 text-left">Name</th>
+            <th className="w-1/2"></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
         <tbody>
           {/* One row per member */}
           {contacts.map(m => {
             const invitationStatus = getInvitationStatus(m.invitationId)
             return (
-              <tr key={m.userId} className="border-t border-b border-gray-200 group">
+              <tr
+                key={m.userId}
+                className="group border-b *:h-12 *:p-1 *:align-middle [&>td>*]:block"
+              >
                 {/* Admin icon */}
-                <td className="w-2 cursor-pointer">
-                  {
+                <td className="w-fit cursor-pointer">
+                  {m.isMember ?
                     m.canChangeAdminStatus ?
                       // Admin users can toggle status for team members other than themselves
                       <button
@@ -36,11 +50,11 @@ export const TeamMembers = () => {
                         title={
                           m.isAdmin ? "Team admin (click to remove)" : "Click to make team admin"
                         }
-                        className={cx(`px-1 m-1 hover:opacity-25 `, {
+                        className={cx(`mx-auto hover:opacity-25 `, {
                           "opacity-100": m.isAdmin,
                           "opacity-0 disabled:opacity-0": !m.isAdmin,
                         })}
-                        children="👑"
+                        children={adminIcon}
                       />
                       // Admin status can't be toggled if self isn't admin, or if contact isn't on team, or if contact is self
                     : <span
@@ -52,16 +66,17 @@ export const TeamMembers = () => {
                             "Member is team admin"
                           : "Member is not team admin"
                         }
-                        className={cx({ "opacity-0": !m.isAdmin })}
-                        children="👑"
+                        // className={cx({ "opacity-0": !m.isAdmin })}
+                        className="mx-auto w-fit"
+                        children={adminIcon}
                       />
 
-                  }
+                  : null}
                 </td>
 
                 {/* Name  */}
-                <td className="p-2">
-                  <span className="Name ml-1">{m.fullName}</span>
+                <td className="grow">
+                  <span className="">{m.fullName}</span>
                 </td>
 
                 {self.isAdmin ?
@@ -71,11 +86,11 @@ export const TeamMembers = () => {
                       {m.isMember ?
                         null
                       : invitationStatus === "PENDING" ?
-                        <span className="">Invitation pending</span>
+                        "Invitation pending"
                       : invitationStatus === "REVOKED" ?
-                        <span className="">Invitation revoked</span>
+                        "Invitation revoked"
                       : invitationStatus === "EXPIRED" ?
-                        <span className="">Invitation expired</span>
+                        "Invitation expired"
                       : null}
                     </td>
                     <td>
@@ -92,11 +107,11 @@ export const TeamMembers = () => {
                   {m.isMember && self.isAdmin && !m.isSelf ?
                     <button
                       title="Remove member from team"
-                      className="hover:opacity-100 opacity-10 font-bold text-xs text-white bg-red-500 rounded-full w-4 h-4"
+                      className="opacity-10 hover:text-danger-500 hover:opacity-100"
                       onClick={() => {
                         team.remove(m.userId)
                       }}
-                      children="⨉"
+                      children={<IconCircleX className="size-6" />}
                     />
                   : null}
                 </td>

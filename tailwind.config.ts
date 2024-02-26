@@ -8,7 +8,7 @@ const condensed = "IBM Plex Sans Condensed"
 const serif = "IBM Plex Serif"
 
 const config: Config = {
-  content: ["./**/*.{html,tsx}"],
+  content: ["./**/*.{html,tsx,ts}"],
   theme: {
     extend: {
       fontFamily: {
@@ -17,11 +17,9 @@ const config: Config = {
         condensed: [condensed, emoji, "sans-serif"],
         serif: [serif, emoji, "serif"],
       },
-      zIndex: {},
       colors: {
         primary: colors.blue,
-        secondary: colors.teal,
-        neutral: colors.gray,
+        neutral: colors.neutral,
         success: colors.green,
         warning: colors.orange,
         danger: colors.red,

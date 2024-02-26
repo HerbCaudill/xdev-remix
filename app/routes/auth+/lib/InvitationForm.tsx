@@ -1,3 +1,5 @@
+import { button } from "ui/cva/button"
+
 export function InvitationForm({ heading, onSubmit }: Props) {
   const [invitationCode, setInvitationCode] = useState<string>("")
 
@@ -12,7 +14,7 @@ export function InvitationForm({ heading, onSubmit }: Props) {
         onSubmit(invitationCode)
       }}
     >
-      <h3 className="font-bold text-lg">{heading}</h3>
+      <h3 className="text-lg font-bold">{heading}</h3>
 
       <p className="">
         <label htmlFor="invitationCode">Enter your invitation code:</label>
@@ -30,7 +32,7 @@ export function InvitationForm({ heading, onSubmit }: Props) {
         />
         <button
           type="submit"
-          className="button button-sm button-primary justify-center sm:justify-stretch"
+          className={cx(button({ color: "primary" }), "justify-center sm:justify-stretch")}
         >
           Join team
         </button>

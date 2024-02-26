@@ -1,5 +1,6 @@
 import { useLocalState } from "hooks/useLocalState"
 import { Munge } from "ui/Munge"
+import { button } from "ui/cva/button"
 
 export default function UserName() {
   const { updateLocalState } = useLocalState()
@@ -36,7 +37,7 @@ export default function UserName() {
         />
         <button
           type="submit"
-          className="button button-sm button-primary justify-center sm:justify-stretch"
+          className={cx(button({ color: "primary" }), "justify-center sm:justify-stretch")}
         >
           Continue
         </button>

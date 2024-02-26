@@ -9,7 +9,10 @@ export function Likes({ likes }: Props) {
   if (numLikes === 0) return null
 
   return (
-    <span className="block text-gray-500 text-xs font-sans" title={likesDescription(likes, userId)}>
+    <span
+      className="block text-neutral-500 text-xs font-sans"
+      title={likesDescription(likes, userId)}
+    >
       👍🏿<span className="pl-1">{numLikes}</span>
     </span>
   )

@@ -85,7 +85,7 @@ const autoImportOptions: AutoImportOptions = {
     },
     { from: "@localfirst/auth-provider-automerge-repo", imports: ["ShareId"], type: true },
   ],
-  dts: "./app/auto-imports.d.ts",
+  dts: "./app/types/auto-imports.d.ts",
   resolvers: [
     iconsResolver({
       prefix: false,

@@ -8,5 +8,8 @@
   "trailingComma": "all",
   "useTabs": false,
   "experimentalTernaries": true,
-  "printWidth": 100
+  "printWidth": 100,
+  "plugins": [
+    "prettier-plugin-tailwindcss"
+  ]
 }

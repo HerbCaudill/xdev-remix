@@ -1,6 +1,6 @@
 import { useDocuments } from "@automerge/automerge-repo-react-hooks"
 import { by } from "lib/by"
-import { Contact } from "types"
+import { Contact } from "types/types"
 import { useRootDocument } from "hooks/useRootDocument"
 import { useAuth } from "./useAuth"
 

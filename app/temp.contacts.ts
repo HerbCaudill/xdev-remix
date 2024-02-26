@@ -1,4 +1,4 @@
-import type { Contact } from "types"
+import type { Contact } from "types/types"
 
 // TODO: These will be replaced with contact information that people can edit
 

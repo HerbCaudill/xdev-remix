@@ -1,5 +1,5 @@
 import { useTeam } from "routes/auth+/hooks/useTeam"
-import { NavItem } from "types"
+import { NavItem } from "types/types"
 import { Avatar } from "ui/Avatar"
 import { Loading } from "ui/Loading"
 
@@ -22,9 +22,9 @@ export function Sidebar() {
   ]
 
   return (
-    <div className="flex flex-col overflow-y-auto bg-gray-50 gap-2 pb-2 h-full">
+    <div className="flex h-full flex-col gap-2 overflow-y-auto bg-neutral-50 pb-2">
       {/* avatar & name */}
-      <div className="flex flex-row items-center px-2 border-b h-12">
+      <div className="flex h-12 flex-row items-center border-b px-2">
         <span className="w-11">
           <Avatar size="xs" userId={self.userId} className="mx-auto" />
         </span>
@@ -51,14 +51,14 @@ const NavLinks = ({ items }: { items: NavItem[] }) => {
             <NavLink
               to={item.to}
               className={({ isActive }) =>
-                cx("px-2 flex items-center text-sm leading-6 border-l-4", {
-                  "bg-gray-50 font-bold text-black border-l-primary-500": isActive,
-                  "text-gray-500 border-l-transparent hover:border-l-gray-500": !isActive,
+                cx("flex items-center border-l-4 px-2 text-sm leading-6", {
+                  "border-l-primary-500 bg-neutral-50 font-bold text-black": isActive,
+                  "border-l-transparent text-neutral-500 hover:border-l-neutral-500": !isActive,
                 })
               }
             >
               <div className="w-10">
-                <item.icon className="h-5 w-5 mx-auto" aria-hidden="true" />
+                <item.icon className="mx-auto h-5 w-5" aria-hidden="true" />
               </div>
               <div>{item.name}</div>
             </NavLink>

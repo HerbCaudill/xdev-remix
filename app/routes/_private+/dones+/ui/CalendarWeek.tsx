@@ -1,6 +1,6 @@
 import { type LocalDate } from "@js-joda/core"
 import { getDaysOfWeek } from "lib/getDaysOfWeek"
-import { DoneData } from "types"
+import { DoneData } from "types/types"
 import { CalendarDay } from "./CalendarDay"
 
 export const CalendarWeek = ({ start, dones }: Props) => (
@@ -9,7 +9,7 @@ export const CalendarWeek = ({ start, dones }: Props) => (
       // mobile
       "grid grid-cols-[auto_1fr] ",
       // desktop
-      "sm:grid-cols-7 sm:grid-rows-[auto_1fr] sm:grid-flow-col sm:divide-x ",
+      "sm:grid-flow-col sm:grid-cols-7 sm:grid-rows-[auto_1fr] sm:divide-x ",
       // common
       "h-full w-full border border-b-0",
     )}
