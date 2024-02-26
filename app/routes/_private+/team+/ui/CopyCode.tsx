@@ -22,7 +22,17 @@ export const CopyCode = ({ code }: { code: string }) => {
           setCopied(true)
         }}
         disabled={copied}
-        children={copied ? "☑︎ Copied" : "📋 Copy"}
+        children={
+          copied ?
+            <>
+              <IconCopyCheck className="size-4" />
+              Copied
+            </>
+          : <>
+              <IconCopy className="size-4" />
+              Copy
+            </>
+        }
         title={copied ? "Code copied" : "Copy code"}
       />
     </div>

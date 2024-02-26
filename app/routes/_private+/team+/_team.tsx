@@ -43,6 +43,8 @@ export const TeamMembers = () => {
           {/* One row per member */}
           {contacts.map(m => {
             const invitationStatus = getInvitationStatus(m.invitationId)
+            // Admin status can't be toggled if self isn't admin, or if contact isn't on team, or if contact is self
+            const iCanChangeAdminStatus = self.isAdmin && !m.isSelf
             return (
               <tr
                 key={m.userId}
@@ -51,7 +53,7 @@ export const TeamMembers = () => {
                 {/* Admin icon */}
                 <td className="w-fit cursor-pointer">
                   {m.isMember ?
-                    m.canChangeAdminStatus ?
+                    iCanChangeAdminStatus ?
                       // Admin users can toggle status for team members other than themselves
                       <button
                         disabled={!self.isAdmin || m.isSelf}
@@ -68,7 +70,6 @@ export const TeamMembers = () => {
                         })}
                         children={adminIcon}
                       />
-                      // Admin status can't be toggled if self isn't admin, or if contact isn't on team, or if contact is self
                     : <span
                         title={
                           !m.isMember ? "Contact is not on team"
@@ -78,7 +79,6 @@ export const TeamMembers = () => {
                             "Member is team admin"
                           : "Member is not team admin"
                         }
-                        // className={cx({ "opacity-0": !m.isAdmin })}
                         className="mx-auto w-fit"
                         children={adminIcon}
                       />
@@ -108,7 +108,11 @@ export const TeamMembers = () => {
                     <td>
                       {/* Invite button */}
                       {!m.isSelf && invitationStatus !== "PENDING" ?
-                        <Link className={button({ size: "xs" })} to={`/team/invite/${m.userId}`}>
+                        <Link
+                          className={button({ size: "xs" })}
+                          to="/team/invite"
+                          state={{ userId: m.userId }}
+                        >
                           Invite
                         </Link>
                       : null}
@@ -134,6 +138,7 @@ export const TeamMembers = () => {
           })}
         </tbody>
       </table>
+      <Outlet />
     </>
   )
 }

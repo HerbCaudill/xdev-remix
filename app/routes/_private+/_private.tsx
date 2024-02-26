@@ -43,8 +43,8 @@ function Layout({ children }: { children: React.ReactNode }) {
     <AuthContextProvider>
       <div>
         {/* slideout sidebar */}
-        <Headless.Transition.Root show={sidebarOpen} as={Fragment}>
-          <Headless.Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
+        <Headless.Transition.Root show={sidebarOpen} as={"div"}>
+          <Headless.Dialog as="div" className="relative z-10 lg:hidden" onClose={setSidebarOpen}>
             <Backdrop />
             <div className="fixed inset-0 flex">
               <Slide>
@@ -64,7 +64,7 @@ function Layout({ children }: { children: React.ReactNode }) {
           </Headless.Dialog>
         </Headless.Transition.Root>
 
-        <div className={`hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-[12em] lg:flex-col`}>
+        <div className={`hidden lg:fixed lg:inset-y-0 lg:z-10 lg:flex lg:w-[12em] lg:flex-col`}>
           <Sidebar />
         </div>
 

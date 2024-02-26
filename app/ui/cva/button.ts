@@ -20,8 +20,8 @@ export const button = cva(
       size: {
         xs: ["text-xs px-2 py-1"],
         sm: ["text-sm px-2 py-1"],
-        md: ["text-sm px-3 py-3"],
-        lg: ["text-base px-4 py-3"],
+        md: ["text-sm px-4 py-3"],
+        lg: ["text-base px-5 py-3"],
       },
     },
     defaultVariants: {

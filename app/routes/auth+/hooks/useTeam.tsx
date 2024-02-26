@@ -30,7 +30,6 @@ export function useTeam() {
       const isAdmin = isMember ? team.memberIsAdmin(contact.userId) : false
       const isSelf = contact.userId === user.userId
       const fullName = `${contact.firstName} ${contact.lastName}`
-      const canChangeAdminStatus = selfIsAdmin && !isSelf
       return {
         documentId,
         ...contact,
@@ -38,7 +37,6 @@ export function useTeam() {
         isMember,
         isAdmin,
         isSelf,
-        canChangeAdminStatus,
         fullName,
       }
     })
