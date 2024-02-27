@@ -1,4 +1,4 @@
-const isDev = process.env.NODE_ENV !== "production"
+const isDev = !import.meta.env.PROD
 
 const httpProtocol = isDev ? "http:" : "https:"
 const wsProtocol = isDev ? "ws:" : "wss:"
