@@ -12,6 +12,7 @@ export function DbProvider({ children }: Props) {
   // `state` is our shared state. `state.dones` is a list of ids
   const [state] = useRootDocument()
 
+  console.log(state)
   const repoIds = new Set(state?.dones ?? [])
 
   // any time the state changes (i.e. we have new ids) we update the list of loaded dones

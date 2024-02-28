@@ -3,13 +3,13 @@ import { RepoContext } from "@automerge/automerge-repo-react-hooks"
 import { type AuthProvider } from "@localfirst/auth-provider-automerge-repo"
 import { type Location } from "@remix-run/react"
 import { useLocalState } from "hooks/useLocalState"
+import { assert } from "lib/assert"
 import { getRootDocumentIdFromTeam } from "routes/auth+/lib/getRootDocumentIdFromTeam"
 import { initializeAuthRepo } from "routes/auth+/lib/initializeAuthRepo"
+import { AuthState } from "types/types"
 import { Loading } from "ui/Loading"
 import { setupAuth } from "./setupAuth"
 import { AuthSetupInfo } from "./types"
-import { AuthState } from "types/types"
-import { assert } from "lib/assert"
 
 /**
  * This provider wraps the entire app. We can be in three possible scenarios when we load:

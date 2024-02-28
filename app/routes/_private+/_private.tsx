@@ -1,3 +1,4 @@
+import { DbProvider } from "context/DbProvider"
 import { AuthContextProvider } from "routes/auth+/lib/AuthContextProvider"
 import { Backdrop } from "ui/Backdrop"
 import { ErrorScreen } from "ui/ErrorScreen"
@@ -41,39 +42,43 @@ function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <AuthContextProvider>
-      <div>
-        {/* slideout sidebar */}
-        <Headless.Transition.Root show={sidebarOpen} as={"div"}>
-          <Headless.Dialog as="div" className="relative z-10 lg:hidden" onClose={setSidebarOpen}>
-            <Backdrop />
-            <div className="fixed inset-0 flex">
-              <Slide>
-                {/* sidebar container */}
-                <Headless.Dialog.Panel className="flex w-full max-w-[12em]">
-                  <Fade>
-                    {/* close button */}
-                    <CloseSidebarButton />
-                  </Fade>
-                  {/* sidebar */}
-                  <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white">
-                    <Sidebar />
-                  </div>
-                </Headless.Dialog.Panel>
-              </Slide>
-            </div>
-          </Headless.Dialog>
-        </Headless.Transition.Root>
+      <DbProvider>
+        <div>
+          {/* slideout sidebar */}
+          <Headless.Transition.Root show={sidebarOpen} as={"div"}>
+            <Headless.Dialog as="div" className="relative z-10 lg:hidden" onClose={setSidebarOpen}>
+              <Backdrop />
+              <div className="fixed inset-0 flex">
+                <Slide>
+                  {/* sidebar container */}
+                  <Headless.Dialog.Panel className="flex w-full max-w-[12em]">
+                    <Fade>
+                      {/* close button */}
+                      <CloseSidebarButton />
+                    </Fade>
+                    {/* sidebar */}
+                    <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white">
+                      <Sidebar />
+                    </div>
+                  </Headless.Dialog.Panel>
+                </Slide>
+              </div>
+            </Headless.Dialog>
+          </Headless.Transition.Root>
 
-        <div className={`hidden lg:fixed lg:inset-y-0 lg:z-10 lg:flex lg:w-[12em] lg:flex-col`}>
-          <Sidebar />
+          <div className={`hidden lg:fixed lg:inset-y-0 lg:z-10 lg:flex lg:w-[12em] lg:flex-col`}>
+            <Sidebar />
+          </div>
+
+          {/* show sidebar button */}
+          <ShowSidebarButton />
+
+          {/* page */}
+          <main className={`flex h-screen w-full flex-col gap-2 pb-2 lg:pl-[12em]`}>
+            {children}
+          </main>
         </div>
-
-        {/* show sidebar button */}
-        <ShowSidebarButton />
-
-        {/* page */}
-        <main className={`flex h-screen w-full flex-col gap-2 pb-2 lg:pl-[12em]`}>{children}</main>
-      </div>
+      </DbProvider>
     </AuthContextProvider>
   )
 }
