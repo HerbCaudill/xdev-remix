@@ -37,8 +37,8 @@
     "@localfirst/auth-syncserver": "^5.4.1",
     "@localfirst/crypto": "^5.4.1",
     "@playwright/test": "^1.42.0",
-    "@remix-run/node": "^2.7.2",
-    "@remix-run/react": "^2.7.2",
+    "@remix-run/node": "^2.8.0",
+    "@remix-run/react": "^2.8.0",
     "@svgr/core": "^8.1.0",
     "@svgr/plugin-jsx": "^8.1.0",
     "@uidotdev/usehooks": "^2.4.1",
@@ -65,7 +65,7 @@
     "workbox-strategies": "^7.0.0"
   },
   "devDependencies": {
-    "@remix-run/dev": "^2.7.2",
+    "@remix-run/dev": "^2.8.0",
     "@types/debug": "^4.1.12",
     "@types/node": "^20.11.21",
     "@types/react": "^18.2.60",
