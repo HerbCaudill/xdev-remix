@@ -96,9 +96,13 @@ const autoImportOptions: AutoImportOptions = {
   ],
 }
 
+// Don't load remix plugin when vite is being used by storybook
+// https://github.com/remix-run/remix/issues/7953#issuecomment-1805649822
+const isStorybook = process.argv[1].includes("/node_modules/storybook")
+
 export default defineConfig({
   plugins: [
-    remix(remixOptions),
+    !isStorybook && remix(remixOptions),
     tsconfigPaths(),
     wasm(),
     topLevelAwait(),

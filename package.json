@@ -16,16 +16,18 @@
     "test": "vitest",
     "test:pw": "pnpm playwright test --project=chromium",
     "test:pw:ui": "cross-env PLAYWRIGHT_UI=1 run-p dev:start dev:syncserver test:pw:exec:ui",
-    "test:pw:exec:ui": "pnpm playwright test --project=chromium --ui"
+    "test:pw:exec:ui": "pnpm playwright test --project=chromium --ui",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@automerge/automerge": "^2.1.10",
-    "@automerge/automerge-repo": "^1.1.1",
-    "@automerge/automerge-repo-network-broadcastchannel": "^1.1.1",
-    "@automerge/automerge-repo-network-websocket": "^1.1.1",
-    "@automerge/automerge-repo-react-hooks": "^1.1.1",
-    "@automerge/automerge-repo-storage-indexeddb": "^1.1.1",
-    "@automerge/automerge-repo-storage-nodefs": "^1.1.1",
+    "@automerge/automerge-repo": "^1.1.2",
+    "@automerge/automerge-repo-network-broadcastchannel": "^1.1.2",
+    "@automerge/automerge-repo-network-websocket": "^1.1.2",
+    "@automerge/automerge-repo-react-hooks": "^1.1.2",
+    "@automerge/automerge-repo-storage-indexeddb": "^1.1.2",
+    "@automerge/automerge-repo-storage-nodefs": "^1.1.2",
     "@headlessui/react": "^1.7.18",
     "@ibm/plex": "^6.4.0",
     "@iconify-json/tabler": "^1.1.105",
@@ -66,6 +68,14 @@
   },
   "devDependencies": {
     "@remix-run/dev": "^2.8.0",
+    "@storybook/addon-essentials": "^7.6.17",
+    "@storybook/addon-interactions": "^7.6.17",
+    "@storybook/addon-links": "^7.6.17",
+    "@storybook/addon-onboarding": "^1.0.11",
+    "@storybook/blocks": "^7.6.17",
+    "@storybook/react": "^7.6.17",
+    "@storybook/react-vite": "^7.6.17",
+    "@storybook/test": "^7.6.17",
     "@types/debug": "^4.1.12",
     "@types/node": "^20.11.21",
     "@types/react": "^18.2.60",
@@ -79,11 +89,13 @@
     "eslint-config-xo-react": "^0.27.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-storybook": "^0.8.0",
     "eslint-plugin-unused-imports": "^3.1.0",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.35",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.11",
+    "storybook": "^7.6.17",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3",
@@ -105,5 +117,10 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:storybook/recommended"
+    ]
   }
 }
