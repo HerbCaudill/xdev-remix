@@ -43,7 +43,7 @@ export function ErrorScreen() {
             .join("\n") ?? "",
       }
 
-  if (!isRouteError) console.error(output)
+  // if (!isRouteError) console.error(output)
 
   return (
     <main className="flex h-screen flex-col items-center justify-center gap-2 px-2 pb-[10%] sm:px-12">

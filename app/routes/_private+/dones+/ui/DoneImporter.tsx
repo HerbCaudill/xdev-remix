@@ -4,6 +4,7 @@ import { useTeam } from "routes/auth+/hooks/useTeam"
 import { useDones } from "routes/_private+/dones+/hooks/useDones"
 import { DoneData } from "types/types"
 import { parse } from "csv-parse/sync"
+import { button } from "ui/cva/button"
 
 export const DoneImporter = () => {
   const { contacts } = useTeam()
@@ -106,12 +107,12 @@ export const DoneImporter = () => {
         }
         buttons={
           <>
-            <button color="white" onClick={onCancel}>
+            <button className={button()} onClick={onCancel}>
               Cancel
             </button>
             <button
               onClick={onImport}
-              color="primary"
+              className={button({ intent: "primary" })}
               disabled={dones.length === 0 || errors.length > 0}
             >
               Import

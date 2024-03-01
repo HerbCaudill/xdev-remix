@@ -6,6 +6,7 @@ import { randomElement } from "lib/randomElement"
 import { useRef, useState } from "react"
 import { Dialog } from "ui/Dialog"
 import { RadioGroup } from "ui/RadioGroup"
+import { button } from "ui/cva/button"
 
 export const DoneGenerator = ({ className = "" }: Props) => {
   const { destroyAll, add } = useDones()
@@ -122,10 +123,10 @@ export const DoneGenerator = ({ className = "" }: Props) => {
         }
         buttons={
           <>
-            <button color="white" onClick={onCancel}>
+            <button className={button()} onClick={onCancel}>
               Cancel
             </button>
-            <button ref={okButtonRef} color="primary" onClick={onConfirm}>
+            <button ref={okButtonRef} className={button({ intent: "primary" })} onClick={onConfirm}>
               OK
             </button>
           </>

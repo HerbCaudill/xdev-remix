@@ -32,7 +32,7 @@ export function InvitationForm({ heading, onSubmit }: Props) {
         />
         <button
           type="submit"
-          className={cx(button({ color: "primary" }), "justify-center sm:justify-stretch")}
+          className={cx(button({ intent: "primary" }), "justify-center sm:justify-stretch")}
         >
           Join team
         </button>

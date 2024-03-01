@@ -1,9 +1,12 @@
 import { getShareId } from "@localfirst/auth-provider-automerge-repo"
 import { useState } from "react"
-import { useAuth } from "../../../hooks/useAuth"
-import { Button } from "../../../components/Button"
-import { Dialog } from "../../../components/Dialog"
+import { Button } from "ui/Button"
+import { Dialog } from "ui/Dialog"
 import { CopyCode } from "./CopyCode"
+
+// TODO: shouldn't have to import from routes, this should be somewhere else
+import { useAuth } from "routes/auth+/hooks/useAuth"
+import { button } from "ui/cva/button"
 
 export const InviteDevice = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -42,9 +45,9 @@ export const InviteDevice = () => {
         }
         buttons={
           <>
-            <Button onClick={onCancel} color="primary">
+            <button onClick={onCancel} className={button({ intent: "primary" })}>
               Done
-            </Button>
+            </button>
           </>
         }
       />

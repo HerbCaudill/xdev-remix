@@ -5,6 +5,7 @@ const NEVER = "never"
 const ALWAYS = "always"
 
 module.exports = {
+  extends: ["plugin:storybook/recommended"],
   plugins: ["unused-imports"],
 
   // use existing prettier config
@@ -40,10 +41,7 @@ module.exports = {
 
     // default makes us wrap every arrow function shorthand expression with braces,
     // which spreads a single line out to 3 lines
-    "@typescript-eslint/no-confusing-void-expression": [
-      WARN,
-      { ignoreArrowShorthand: true },
-    ],
+    "@typescript-eslint/no-confusing-void-expression": [WARN, { ignoreArrowShorthand: true }],
 
     // default is camelCase only. We want PascalCase for React components, and UPPER_CASE for constants.
     "@typescript-eslint/naming-convention": [
@@ -60,10 +58,7 @@ module.exports = {
     "import/extensions": [ERROR, NEVER, { ".json": ALWAYS, ".css": ALWAYS }],
 
     // default is kebabCase
-    "unicorn/filename-case": [
-      ERROR,
-      { cases: { camelCase: true, pascalCase: true } },
-    ],
+    "unicorn/filename-case": [ERROR, { cases: { camelCase: true, pascalCase: true } }],
   },
 
   overrides: [],

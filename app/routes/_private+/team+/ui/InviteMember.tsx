@@ -54,7 +54,7 @@ export const InviteMember = ({ userId }: { userId: string }) => {
       }
       buttons={
         <>
-          <button onClick={onCancel} color="primary">
+          <button onClick={onCancel} className={button({ intent: "primary" })}>
             Done
           </button>
         </>

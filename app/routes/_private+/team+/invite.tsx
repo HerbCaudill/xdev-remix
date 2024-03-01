@@ -61,7 +61,7 @@ export default function InviteMember() {
       }
       buttons={
         <button
-          className={button({ color: "primary", size: "md" })}
+          className={button({ intent: "primary", size: "md" })}
           onClick={() => setIsOpen(false)}
         >
           Done

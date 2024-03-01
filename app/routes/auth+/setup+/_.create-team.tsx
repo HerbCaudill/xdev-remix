@@ -46,7 +46,7 @@ export default function CreateTeam() {
         />
         <button
           type="submit"
-          className={cx(button({ color: "primary" }), "justify-center sm:justify-stretch")}
+          className={cx(button({ intent: "primary" }), "justify-center sm:justify-stretch")}
         >
           Create team
         </button>

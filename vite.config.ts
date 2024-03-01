@@ -44,11 +44,6 @@ const pwaOptions: Partial<VitePWAOptions> = {
       { src: "icon-512x512.png", sizes: "512x512", type: "image/png", purpose: "any maskable" },
     ],
   },
-  devOptions: {
-    enabled: false,
-    type: "module",
-    navigateFallback: "index.html",
-  },
 }
 
 // This is an experiment with auto-imports. Not totally sure how I feel about it yet - it's a bit magical.

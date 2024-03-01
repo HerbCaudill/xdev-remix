@@ -43,7 +43,7 @@ export default function SignOut() {
             No, go back
           </Link>
           <span className="grow" />
-          <button className={button({ size: "md", color: "danger" })} onClick={onConfirm}>
+          <button className={button({ size: "md", intent: "danger" })} onClick={onConfirm}>
             Yes, sign out
           </button>
         </div>
@@ -52,7 +52,7 @@ export default function SignOut() {
         <span className="p-4 text-4xl">👋</span>
         <p>You've been signed out.</p>
         <p>
-          <a href="/" className={button({ size: "md", color: "primary" })}>
+          <a href="/" className={button({ size: "md", intent: "primary" })}>
             Sign in again
           </a>
         </p>

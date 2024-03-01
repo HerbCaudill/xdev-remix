@@ -37,7 +37,7 @@ export default function UserName() {
         />
         <button
           type="submit"
-          className={cx(button({ color: "primary" }), "justify-center sm:justify-stretch")}
+          className={cx(button({ intent: "primary" }), "justify-center sm:justify-stretch")}
         >
           Continue
         </button>
