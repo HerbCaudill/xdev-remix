@@ -6,7 +6,7 @@
  * ```
  */
 export const by =
-  <T extends Record<string, ConvertibleToString>>(key: keyof T) =>
+  <T extends Record<K, ConvertibleToString>, K extends keyof T>(key: K) =>
   (a: T, b: T) => {
     const aVal = a[key].toString() ?? ""
     const bVal = b[key].toString() ?? ""

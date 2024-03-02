@@ -95,6 +95,7 @@
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.11",
     "storybook": "^v8.0.0-rc.0",
+    "storybook-addon-react-router-v6": "^2.0.10",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3",

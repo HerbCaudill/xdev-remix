@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority"
 
 const variants = {
   intent: {
-    primary: ["bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 text-white           "],
+    primary: ["bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 text-white"],
     neutral: [
       "bg-white hover:bg-neutral-50 focus:ring-neutral-500 text-neutral-700 border border-neutral-300",
     ],

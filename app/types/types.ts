@@ -1,4 +1,5 @@
 import type { AutomergeUrl, DocumentId } from "@automerge/automerge-repo"
+import { Member } from "@localfirst/auth"
 import type { AuthProvider, ShareId } from "@localfirst/auth-provider-automerge-repo"
 
 /** Unix timestamp (nominal type) */
@@ -58,18 +59,55 @@ export type PartialDoneData = Omit<
   "id" | "timestamp"
 >
 
-/** The contact record of a user. */
+/** The "staff directory" record of a user. */
 export type Contact = {
+  /** Reference to the Automerge document containing their staff contact info */
+  documentId: string
+
+  /**
+   * If this contact is a member, this is their localfirst/auth userId. If not, this
+   * contains their first name as a placeholder.
+   */
   userId: string
+
+  /** TODO replace this with a reference to a blob stored locally */
   avatarUrl: string
+
   firstName: string
+
   lastName: string
+
   // TODO: add all the fields in the staff directory
 
-  /** If this contact has been invited to the team, we store the invitation id so that when they're
-   * admitted we can associate their localfirst/auth user with this contact */
+  /**
+   * If this contact has been invited to the team, we store the invitation id so that when they're
+   * admitted we can associate their localfirst/auth user with their contact document
+   */
   invitationId?: Base58
 }
+
+export type InvitationStatus = "NOT_INVITED" | "PENDING" | "REVOKED" | "EXPIRED"
+
+/** A contact along with information regarding their team membership */
+export type ExtendedContact = Contact & {
+  /** True if this is the currently logged in user's record */
+  isSelf: boolean
+
+  /** first last */
+  fullName: string
+
+  /** True if this contact is a member of the team */
+  isMember: boolean
+
+  /** True if this contact is an admin of the team */
+  isAdmin: boolean
+
+  /** The status of this contact's invitation, if applicable */
+  invitationStatus?: InvitationStatus
+} & (
+    | Member // If contact is a member, includes their admin roles, keys, roles & devices
+    | {}
+  )
 
 export type Icon = (props: React.SVGProps<SVGSVGElement>) => React.ReactElement
 

@@ -1,8 +1,9 @@
 import { useDocuments } from "@automerge/automerge-repo-react-hooks"
 import { by } from "lib/by"
-import { Contact } from "types/types"
+import { Contact, ExtendedContact, InvitationStatus } from "types/types"
 import { useRootDocument } from "hooks/useRootDocument"
 import { useAuth } from "./useAuth"
+import { Base58, Member } from "@localfirst/auth"
 
 export function useTeam() {
   const { user, team } = useAuth()
@@ -12,8 +13,16 @@ export function useTeam() {
   const { contacts: contactIds = [] } = rootDoc ?? {}
   const contactDocs = useDocuments<Contact>(contactIds)
 
-  const [teamMembers, setTeamMembers] = useState(team.members())
+  const [teamMembers, setTeamMembers] = useState<Member[]>(team.members())
   team.on("updated", () => setTeamMembers(team.members()))
+
+  const getInvitationStatus = (invitationId?: Base58): InvitationStatus => {
+    if (!invitationId || !team.hasInvitation(invitationId)) return "NOT_INVITED"
+    const { uses, expiration, revoked } = team.getInvitation(invitationId)
+    if (revoked) return "REVOKED"
+    if (expiration < Date.now()) return "EXPIRED"
+    return "PENDING"
+  }
 
   // hooks ↑
 
@@ -23,21 +32,22 @@ export function useTeam() {
 
   // Join contact docs with team members
 
-  const contacts = Object.entries(contactDocs)
-    .map(([documentId, contact]) => {
+  const contacts: ExtendedContact[] = Object.values(contactDocs)
+    .map(contact => {
       const isMember = team.has(contact.userId)
-      const member = isMember ? teamMembers.find(m => m.userId === contact.userId) : {}
+      const member = isMember ? teamMembers.find(m => m.userId === contact.userId) : undefined
       const isAdmin = isMember ? team.memberIsAdmin(contact.userId) : false
       const isSelf = contact.userId === user.userId
       const fullName = `${contact.firstName} ${contact.lastName}`
+      const invitationStatus = isMember ? undefined : getInvitationStatus(contact.invitationId)
       return {
-        documentId,
-        ...contact,
-        ...member,
-        isMember,
-        isAdmin,
         isSelf,
         fullName,
+        isAdmin,
+        invitationStatus,
+        isMember,
+        ...(isMember ? member : {}),
+        ...contact,
       }
     })
     .sort(by("lastName"))

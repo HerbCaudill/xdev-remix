@@ -26,7 +26,7 @@ export function Sidebar() {
       {/* avatar & name */}
       <div className="flex h-12 flex-row items-center border-b px-2">
         <span className="w-11">
-          <Avatar size="xs" userId={self.userId} className="mx-auto" />
+          <Avatar size="xs" contact={self} className="mx-auto" />
         </span>
         <span className="truncate text-sm text-black">{self.fullName}</span>
       </div>

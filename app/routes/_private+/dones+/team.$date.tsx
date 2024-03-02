@@ -23,16 +23,16 @@ export default function TeamDones() {
 
   return (
     <div className="sm:grid sm:grid-cols-3 lg:grid-cols-5">
-      {contacts.map(c => (
-        <div className="block w-full p-3" key={c.userId}>
+      {contacts.map(contact => (
+        <div className="block w-full p-3" key={contact.userId}>
           {/* user's avatar & photo */}
           <h2 className="mb-2 border-b border-b-black pb-2 text-2xl font-bold tracking-tight text-neutral-900">
-            <Avatar className="mr-2" userId={c.userId} />
-            <span className="text-lg font-normal">{c.firstName}</span>
+            <Avatar className="mr-2" contact={contact} />
+            <span className="text-lg font-normal">{contact.firstName}</span>
           </h2>
           {/* user's dones */}
           <ul className="flex flex-col divide-y font-normal text-neutral-700 dark:text-neutral-400">
-            {byUser[c.userId]?.map(({ id }) => (
+            {byUser[contact.userId]?.map(({ id }) => (
               <DoneDisplay key={id} doneId={id} className="py-1" />
             ))}
           </ul>

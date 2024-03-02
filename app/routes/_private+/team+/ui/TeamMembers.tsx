@@ -1,116 +1,136 @@
-import * as Auth from "@localfirst/auth"
 import cx from "classnames"
-import { InviteMember } from "./InviteMember"
-import { useTeam } from "routes/auth+/hooks/useTeam"
+import { by } from "lib/by"
+import { ExtendedContact } from "types/types"
 import { button } from "ui/cva/button"
+import { Avatar } from "ui/Avatar"
 
-export const TeamMembers = () => {
-  const { contacts, team, self } = useTeam()
-  const getInvitationStatus = (invitationId?: Auth.Base58): InvitationStatus => {
-    if (!invitationId || !team.hasInvitation(invitationId)) return "NOT_INVITED"
-    const { uses, expiration, revoked } = team.getInvitation(invitationId)
-    if (revoked) return "REVOKED"
-    if (expiration < Date.now()) return "EXPIRED"
-    return "PENDING"
-  }
+export const TeamMembers = ({
+  self,
+  contacts,
+  onPromote = () => {},
+  onDemote = () => {},
+}: Props) => {
+  const adminIcon = <IconCircleKey className="size-5 text-primary-500" />
 
-  const adminIcon = <IconCircleKey className="size-6 text-primary-500" />
   return (
     <>
       <table className="my-3 w-full max-w-xl text-sm">
-        <thead>
+        {/* <thead>
           <tr className="border-b border-black text-xs uppercase text-neutral-700 *:p-2 *:font-normal">
             <th>Admin</th>
-            <th className="w-1/2 text-left">Name</th>
-            <th className="w-1/2"></th>
+            <th className="w-2/3 text-left">Name</th>
+            <th className="w-1/3"></th>
             <th></th>
             <th></th>
           </tr>
-        </thead>
+        </thead> */}
         <tbody>
           {/* One row per member */}
-          {contacts.map(m => {
-            const invitationStatus = getInvitationStatus(m.invitationId)
+          {contacts.sort(by("lastName")).map(contact => {
+            // Admin users can toggle status for team members other than themselves
+            const canChangeAdminStatus = self.isAdmin && !contact.isSelf
             return (
               <tr
-                key={m.userId}
+                key={contact.userId}
                 className="group border-b *:h-12 *:p-1 *:align-middle [&>td>*]:block"
               >
                 {/* Admin icon */}
-                <td className="w-fit cursor-pointer">
-                  {m.isMember ?
-                    m.canChangeAdminStatus ?
-                      // Admin users can toggle status for team members other than themselves
+                <td className="w-fit ">
+                  {contact.isMember ?
+                    canChangeAdminStatus ?
                       <button
-                        disabled={!self.isAdmin || m.isSelf}
+                        disabled={!self.isAdmin || contact.isSelf}
                         onClick={() => {
-                          if (m.isAdmin) team.removeMemberRole(m.userId, Auth.ADMIN)
-                          else team.addMemberRole(m.userId, Auth.ADMIN)
+                          if (contact.isAdmin) onDemote(contact.userId)
+                          else onPromote(contact.userId)
                         }}
                         title={
-                          m.isAdmin ? "Team admin (click to remove)" : "Click to make team admin"
+                          contact.isAdmin ?
+                            "Team admin (click to remove)"
+                          : "Click to make team admin"
                         }
-                        className={cx(`mx-auto hover:opacity-25 `, {
-                          "opacity-100": m.isAdmin,
-                          "opacity-0 disabled:opacity-0": !m.isAdmin,
+                        className={cx(`mx-auto cursor-pointer hover:opacity-25`, {
+                          "opacity-100": contact.isAdmin,
+                          "opacity-0 disabled:opacity-0": !contact.isAdmin,
                         })}
                         children={adminIcon}
                       />
                       // Admin status can't be toggled if self isn't admin, or if contact isn't on team, or if contact is self
                     : <span
                         title={
-                          !m.isMember ? "Contact is not on team"
-                          : m.isSelf ?
+                          !contact.isMember ? "Contact is not on team"
+                          : contact.isSelf ?
                             "You are team admin"
-                          : m.isAdmin ?
+                          : contact.isAdmin ?
                             "Member is team admin"
                           : "Member is not team admin"
                         }
-                        // className={cx({ "opacity-0": !m.isAdmin })}
-                        className="mx-auto w-fit"
+                        className={cx({ "opacity-0": !contact.isAdmin }, "mx-auto w-fit")}
                         children={adminIcon}
                       />
 
                   : null}
                 </td>
 
-                {/* Name  */}
-                <td className="grow">
-                  <span className="">{m.fullName}</span>
+                {/* Name & avatar */}
+                <td className="flex w-2/3 flex-row items-center gap-2">
+                  <Avatar contact={contact} />
+                  <div className={cx({ "font-bold": contact.isSelf })}>{contact.fullName}</div>
                 </td>
 
                 {self.isAdmin ?
                   <>
-                    <td>
+                    <td className="w-1/3 text-xs">
                       {/* Invitation status */}
-                      {m.isMember ?
+                      {contact.isMember ?
                         null
-                      : invitationStatus === "PENDING" ?
+                      : contact.invitationStatus === "PENDING" ?
                         "Invitation pending"
-                      : invitationStatus === "REVOKED" ?
+                      : contact.invitationStatus === "REVOKED" ?
                         "Invitation revoked"
-                      : invitationStatus === "EXPIRED" ?
+                      : contact.invitationStatus === "EXPIRED" ?
                         "Invitation expired"
                       : null}
                     </td>
-                    <td>
+                    <td className="w-0">
                       {/* Invite button */}
-                      {!m.isSelf && invitationStatus !== "PENDING" ?
-                        <InviteMember userId={m.userId} />
+                      {(
+                        !contact.isMember &&
+                        !contact.isSelf &&
+                        contact.invitationStatus !== "PENDING"
+                      ) ?
+                        <Link
+                          className={button({ size: "xs" })}
+                          to="/team/invite"
+                          state={{ userId: contact.userId }}
+                        >
+                          Invite
+                        </Link>
+                      : null}
+
+                      {/* Revoke button */}
+                      {contact.invitationStatus === "PENDING" ?
+                        <Link
+                          to="/team/revoke"
+                          state={{ userId: contact.userId }}
+                          title="Revoke invitation"
+                          className={button({ size: "xs" })}
+                        >
+                          Revoke
+                        </Link>
                       : null}
                     </td>
                   </>
                 : null}
 
                 {/* Remove Button */}
-                <td>
-                  {m.isMember && self.isAdmin && !m.isSelf ?
-                    <button
+                <td className="w-0">
+                  {contact.isMember && self.isAdmin && !contact.isSelf ?
+                    <Link
+                      to="/team/remove"
+                      state={{ userId: contact.userId }}
                       title="Remove member from team"
                       className="opacity-10 hover:text-danger-500 hover:opacity-100"
-                      onClick={() => {
-                        team.remove(m.userId)
-                      }}
                       children={<IconCircleX className="size-6" />}
                     />
                   : null}
@@ -125,3 +145,13 @@ export const TeamMembers = () => {
 }
 
 type InvitationStatus = "NOT_INVITED" | "PENDING" | "REVOKED" | "EXPIRED"
+
+type Props = {
+  self: ExtendedContact
+  contacts: ExtendedContact[]
+  onPromote?: (userId: string) => void
+  onDemote?: (userId: string) => void
+  onRemove?: (userId: string) => void
+  onInvite?: (userId: string) => void
+  onRevokeInvitation?: (userId: string) => void
+}

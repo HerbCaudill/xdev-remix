@@ -2,7 +2,7 @@ import type { Contact } from "types/types"
 
 // TODO: These will be replaced with contact information that people can edit
 
-export const CONTACTS: Contact[] = [
+export const CONTACTS: Omit<Contact, "documentId">[] = [
   {
     userId: "herb",
     firstName: "Herb",

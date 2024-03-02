@@ -1,16 +1,12 @@
-import { useTeam } from "routes/auth+/hooks/useTeam"
+import { ExtendedContact } from "types/types"
 
-export function Avatar({ className = "", size = "md", userId }: Props) {
-  const { getContact } = useTeam()
-  const contact = getContact(userId)
-  if (!contact) return null
-
+export function Avatar({ className = "", size = "md", contact }: Props) {
   return (
     <span
       title={contact.fullName}
       className={cx(
-        "rounded-full border border-white overflow-hidden",
-        "bg-neutral-500 text-white font-extrabold flex content-center justify-center items-center",
+        "overflow-hidden rounded-full border border-white",
+        "flex content-center items-center justify-center bg-neutral-500 font-extrabold text-white",
         sizeStyles[size],
         className,
       )}
@@ -36,5 +32,5 @@ const sizeStyles = {
 type Props = {
   className?: string
   size?: keyof typeof sizeStyles
-  userId: string
+  contact: ExtendedContact
 }

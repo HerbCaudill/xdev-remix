@@ -2,7 +2,7 @@ import { type AutomergeUrl } from "@automerge/automerge-repo"
 import { useDocument } from "@automerge/automerge-repo-react-hooks"
 import { useDones } from "routes/_private+/dones+/hooks/useDones"
 import { DoneData } from "types/types"
-import { DeleteButton } from "ui/DeleteButton"
+import { DeleteButton } from "routes/_private+/dones+/ui/DeleteButton"
 import { DoneInput, type Props as InputProps } from "./DoneInput"
 import { Likes } from "./Likes"
 

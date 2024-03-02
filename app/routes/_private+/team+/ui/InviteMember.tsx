@@ -1,12 +1,12 @@
-import { randomKey } from "@localfirst/crypto"
-import type { UnixTimestamp } from "@localfirst/auth"
 import { useDocument } from "@automerge/automerge-repo-react-hooks"
+import type { UnixTimestamp } from "@localfirst/auth"
+import { randomKey } from "@localfirst/crypto"
+import { HOUR } from "lib/constants"
 import { useTeam } from "routes/auth+/hooks/useTeam"
 import { Contact } from "types/types"
-import { HOUR } from "lib/constants"
 import { Dialog } from "ui/Dialog"
+import { button } from "ui/cva/button"
 import { CopyCode } from "./CopyCode"
-import { button } from "../../../../ui/cva/button"
 
 export const InviteMember = ({ userId }: { userId: string }) => {
   const navigate = useNavigate()

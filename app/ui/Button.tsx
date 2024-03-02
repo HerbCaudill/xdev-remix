@@ -16,7 +16,7 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   intent?: "neutral" | "primary" | "danger"
 
   /** What size should the button be? */
-  size?: "xs" | "sm" | "md" | "lg"
+  size?: SizeVariant
 
   className?: string
 }
