@@ -1,7 +1,7 @@
-import { CONTACTS } from "temp.contacts"
+import { CONTACTS } from "data/contacts"
 import { Contact } from "types/types"
 
-export const getInitialContacts = (user: User, teamName: string): Contact[] => {
+export const getInitialContacts = (user: User, teamName: string): Omit<Contact, "documentId">[] => {
   // HACK: For now, we're going to load the list of DevResults users from a hard-coded list. We'll
   // only do this when (a) the username given is in that list (e.g. "herb" or "fred"), and (2) the
   // team name is "DevResults".

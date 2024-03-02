@@ -1,4 +1,4 @@
-import { AuthSetupInfo } from "routes/auth+/lib/types"
+import { AuthSetupInfo } from "context/auth/types"
 import { useLocalState } from "hooks/useLocalState"
 import { button } from "ui/cva/button"
 

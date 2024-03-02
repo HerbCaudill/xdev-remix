@@ -1,12 +1,12 @@
 import { LocalDate } from "@js-joda/core"
-import { useTeam } from "routes/auth+/hooks/useTeam"
 import { dummyData } from "data/dummyData"
-import { useDones } from "routes/_private+/dones+/hooks/useDones"
+import { useTeam } from "hooks/useTeam"
 import { randomElement } from "lib/randomElement"
 import { useRef, useState } from "react"
 import { Dialog } from "ui/Dialog"
 import { RadioGroup } from "ui/RadioGroup"
 import { button } from "ui/cva/button"
+import { useDones } from "../hooks/useDones"
 
 export const DoneGenerator = ({ className = "" }: Props) => {
   const { destroyAll, add } = useDones()

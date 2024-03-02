@@ -2,8 +2,8 @@ import { useDocument } from "@automerge/automerge-repo-react-hooks"
 import type { UnixTimestamp } from "@localfirst/auth"
 import { randomKey } from "@localfirst/crypto"
 import { HOUR } from "lib/constants"
-import { useTeam } from "routes/auth+/hooks/useTeam"
-import { Contact } from "types/types"
+import { useTeam } from "hooks/useTeam"
+import { Contact, ExtendedContact } from "types/types"
 import { Dialog } from "ui/Dialog"
 import { CopyCode } from "./ui/CopyCode"
 import { button } from "ui/cva/button"
@@ -12,20 +12,16 @@ export default function InviteMember() {
   const { userId } = useLocation().state as { userId: string }
 
   const [invitationCode, setInvitationCode] = useState<string>()
-  const { contactMap, team, self } = useTeam()
-  const contactDocumentId = contactMap[userId]?.documentId as DocumentId
-  const [contactDoc, changeContactDoc] = useDocument<Contact>(contactDocumentId)
-  const { firstName, lastName } = contactDoc ?? {}
+  const { getContact, team, self } = useTeam()
+  const contact = getContact(userId)
+  if (!contact) return null
+
+  const [_, changeContactDoc] = useDocument<Contact>(contact.documentId)
 
   const navigate = useNavigate()
 
-  const [isOpen, setIsOpen] = useState(false)
   useEffect(() => {
-    setIsOpen(true)
-  }, [])
-
-  useEffect(() => {
-    if (isOpen && self?.isAdmin && !invitationCode) {
+    if (self?.isAdmin && !invitationCode) {
       const seed = randomKey(4)
 
       // Create an invitation that expires in 48 hours and can only be used once
@@ -40,7 +36,7 @@ export default function InviteMember() {
       const shareId = getShareId(team)
       setInvitationCode(`${shareId}${seed}`)
     }
-  }, [self, isOpen, invitationCode])
+  }, [self, invitationCode])
 
   // ----- ↑ hooks
 
@@ -48,14 +44,30 @@ export default function InviteMember() {
   if (!self?.isAdmin) return null
 
   return (
+    <InviteMemberDialog
+      afterLeave={() => navigate("..")}
+      contact={contact}
+      invitationCode={invitationCode}
+    />
+  )
+}
+
+function InviteMemberDialog({ afterLeave, contact, invitationCode }: Props) {
+  const [isOpen, setIsOpen] = useState(false)
+  useEffect(() => {
+    setIsOpen(true)
+  }, [])
+
+  if (!invitationCode) return null
+  return (
     <Dialog
       isOpen={isOpen}
       title={`Invite member`}
       onClose={() => setIsOpen(false)}
-      afterLeave={() => navigate("..")}
+      afterLeave={afterLeave}
       children={
         <div className="flex flex-col space-y-4">
-          <p>Copy this code and send it to {firstName}.</p>
+          <p>Copy this code and send it to {contact.firstName}.</p>
           <CopyCode code={invitationCode!} />
         </div>
       }
@@ -69,4 +81,10 @@ export default function InviteMember() {
       }
     />
   )
+}
+
+type Props = {
+  afterLeave: () => void
+  contact: Contact
+  invitationCode?: string
 }

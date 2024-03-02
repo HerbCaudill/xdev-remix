@@ -1,8 +1,8 @@
-import { createDevice } from "routes/auth+/lib/createDevice"
+import { createDevice } from "context/auth/createDevice"
 import { SetupResult, CreateTeamInfo } from "./types"
-import { initializeAuthRepo } from "routes/auth+/lib/initializeAuthRepo"
-import { getInitialContacts } from "routes/auth+/lib/getInitialContacts"
-import { storeRootDocumentIdOnTeam } from "routes/auth+/lib/storeRootDocumentIdOnTeam"
+import { initializeAuthRepo } from "context/auth/initializeAuthRepo"
+import { getInitialContacts } from "context/auth/getInitialContacts"
+import { storeRootDocumentIdOnTeam } from "context/auth/storeRootDocumentIdOnTeam"
 import { Contact, SharedState } from "types/types"
 
 export const createTeam = async ({ userName, teamName }: CreateTeamInfo): Promise<SetupResult> => {
@@ -19,9 +19,10 @@ export const createTeam = async ({ userName, teamName }: CreateTeamInfo): Promis
   // Create contact documents
   const contacts = getInitialContacts(user, teamName)
   const contactDocumentIds = contacts.map(contact => {
-    const contactHandle = repo.create<Contact>(contact)
-    contactHandle.change(s => Object.assign(s, contact))
-    return contactHandle.documentId
+    const contactHandle = repo.create(contact as Contact) // missing documentId but we'll fix that
+    const { documentId } = contactHandle
+    contactHandle.change(s => (s.documentId = documentId))
+    return documentId
   })
 
   // Initialize the root document.

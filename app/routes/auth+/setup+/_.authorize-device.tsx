@@ -1,6 +1,6 @@
-import { AuthSetupInfo } from "routes/auth+/lib/types"
+import { AuthSetupInfo } from "context/auth/types"
 import { useLocalState } from "hooks/useLocalState"
-import { InvitationForm } from "routes/auth+/lib/InvitationForm"
+import { InvitationForm } from "context/auth/InvitationForm"
 
 export default function AuthorizeDevice() {
   const { userName } = useLocalState()

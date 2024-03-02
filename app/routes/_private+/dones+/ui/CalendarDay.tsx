@@ -1,7 +1,7 @@
 import { LocalDate } from "@js-joda/core"
-import { useDones } from "routes/_private+/dones+/hooks/useDones"
 import { DAY_OF_MONTH, DAY_OF_WEEK, formatDate } from "lib/formatDate"
 import { DoneData } from "types/types"
+import { useDones } from "../hooks/useDones"
 import { DoneEditable } from "./DoneEditable"
 import { DoneInput } from "./DoneInput"
 

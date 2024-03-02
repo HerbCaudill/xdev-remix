@@ -1,10 +1,10 @@
-import { Dialog } from "ui/Dialog"
 import { LocalDate } from "@js-joda/core"
-import { useTeam } from "routes/auth+/hooks/useTeam"
-import { useDones } from "routes/_private+/dones+/hooks/useDones"
-import { DoneData } from "types/types"
 import { parse } from "csv-parse/sync"
+import { useTeam } from "hooks/useTeam"
+import { DoneData } from "types/types"
+import { Dialog } from "ui/Dialog"
 import { button } from "ui/cva/button"
+import { useDones } from "../hooks/useDones"
 
 export const DoneImporter = () => {
   const { contacts } = useTeam()

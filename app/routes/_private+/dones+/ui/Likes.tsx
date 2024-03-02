@@ -1,5 +1,5 @@
-import { useAuth } from "routes/auth+/hooks/useAuth"
-import { likesDescription } from "routes/_private+/dones+/lib/likesDescription"
+import { useAuth } from "context/auth/useAuth"
+import { likesDescription } from "../lib/likesDescription"
 
 export function Likes({ likes }: Props) {
   const { user } = useAuth()
@@ -10,7 +10,7 @@ export function Likes({ likes }: Props) {
 
   return (
     <span
-      className="block text-neutral-500 text-xs font-sans"
+      className="block font-sans text-xs text-neutral-500"
       title={likesDescription(likes, userId)}
     >
       👍🏿<span className="pl-1">{numLikes}</span>

@@ -1,5 +1,5 @@
-import { DonesNav } from "routes/_private+/dones+/ui/DonesNav"
-import { WeekNav } from "routes/_private+/dones+/ui/WeekNav"
+import { DonesNav } from "./ui/DonesNav"
+import { WeekNav } from "./ui/WeekNav"
 import { useRedirect } from "hooks/useRedirect"
 
 export default function Dones({ children }: { children: React.ReactNode }) {

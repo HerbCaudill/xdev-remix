@@ -1,5 +1,5 @@
-import { DbProvider } from "context/DbProvider"
-import { AuthContextProvider } from "routes/auth+/lib/AuthContextProvider"
+import { DbProvider } from "context/db/DbProvider"
+import { AuthContextProvider } from "context/auth/AuthContextProvider"
 import { Backdrop } from "ui/Backdrop"
 import { ErrorScreen } from "ui/ErrorScreen"
 import { Sidebar } from "ui/Sidebar"

@@ -1,7 +1,7 @@
-import { createDevice } from "routes/auth+/lib/createDevice"
+import { createDevice } from "context/auth/createDevice"
 import { SetupResult, JoinTeamInfo } from "./types"
-import { initializeAuthRepo } from "routes/auth+/lib/initializeAuthRepo"
-import { parseInvitationCode } from "routes/auth+/lib/parseInvitationCode"
+import { initializeAuthRepo } from "context/auth/initializeAuthRepo"
+import { parseInvitationCode } from "context/auth/parseInvitationCode"
 import { eventPromise } from "lib/eventPromise"
 
 export const joinTeam = async ({

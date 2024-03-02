@@ -9,7 +9,7 @@ import {
 } from "workbox-precaching"
 import { NavigationRoute, registerRoute } from "workbox-routing"
 import { CacheFirst } from "workbox-strategies"
-import { CONTACTS } from "./temp.contacts.js"
+import { CONTACTS } from "./data/contacts.js"
 
 declare let self: ServiceWorkerGlobalScope
 

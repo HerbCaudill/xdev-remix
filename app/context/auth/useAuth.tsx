@@ -1,4 +1,4 @@
-import { AuthContext } from "routes/auth+/lib/AuthContextProvider"
+import { AuthContext } from "context/auth/AuthContextProvider"
 
 // Convenience wrapper around our authContext for accessing the auth data and provider
 export function useAuth() {

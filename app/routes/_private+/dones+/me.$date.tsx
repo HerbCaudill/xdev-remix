@@ -1,10 +1,9 @@
 import { LocalDate } from "@js-joda/core"
+import { useAuth } from "context/auth/useAuth"
 import { useLiveQuery } from "dexie-react-hooks"
 import { useSelectedWeek } from "hooks/useSelectedWeek"
-import { useDones } from "routes/_private+/dones+/hooks/useDones"
-import { CalendarWeek } from "routes/_private+/dones+/ui/CalendarWeek"
-import { useAuth } from "routes/auth+/hooks/useAuth"
-import { WeekNav } from "./ui/WeekNav"
+import { useDones } from "./hooks/useDones"
+import { CalendarWeek } from "./ui/CalendarWeek"
 
 export default function MyDones() {
   const { user } = useAuth()

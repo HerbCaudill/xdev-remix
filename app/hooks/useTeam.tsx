@@ -1,9 +1,10 @@
 import { useDocuments } from "@automerge/automerge-repo-react-hooks"
 import { by } from "lib/by"
-import { Contact, ExtendedContact, InvitationStatus } from "types/types"
+import { Contact, ExtendedContact } from "types/types"
 import { useRootDocument } from "hooks/useRootDocument"
-import { useAuth } from "./useAuth"
-import { Base58, Member } from "@localfirst/auth"
+import { useAuth } from "../context/auth/useAuth"
+import { Member } from "@localfirst/auth"
+import { getInvitationStatus } from "../lib/getInvitationStatus"
 
 export function useTeam() {
   const { user, team } = useAuth()
@@ -14,21 +15,11 @@ export function useTeam() {
   const contactDocs = useDocuments<Contact>(contactIds)
 
   const [teamMembers, setTeamMembers] = useState<Member[]>(team.members())
-  team.on("updated", () => setTeamMembers(team.members()))
-
-  const getInvitationStatus = (invitationId?: Base58): InvitationStatus => {
-    if (!invitationId || !team.hasInvitation(invitationId)) return "NOT_INVITED"
-    const { uses, expiration, revoked } = team.getInvitation(invitationId)
-    if (revoked) return "REVOKED"
-    if (expiration < Date.now()) return "EXPIRED"
-    return "PENDING"
-  }
 
   // hooks ↑
 
-  // Logged in member
-
-  const selfIsAdmin = team.memberIsAdmin(user.userId)
+  // Update team members when the team changes
+  team.on("updated", () => setTeamMembers(team.members()))
 
   // Join contact docs with team members
 
@@ -39,7 +30,8 @@ export function useTeam() {
       const isAdmin = isMember ? team.memberIsAdmin(contact.userId) : false
       const isSelf = contact.userId === user.userId
       const fullName = `${contact.firstName} ${contact.lastName}`
-      const invitationStatus = isMember ? undefined : getInvitationStatus(contact.invitationId)
+      const invitationStatus =
+        isMember ? undefined : getInvitationStatus(team, contact.invitationId)
       return {
         isSelf,
         fullName,
@@ -54,7 +46,7 @@ export function useTeam() {
 
   const contactMap = Object.fromEntries(contacts.map(c => [c.userId, c]))
   const getContact = (userId: string) => contactMap[userId]
-  const self = contacts.find(c => c.userId === user.userId)!
+  const self = getContact(user.userId)
 
   return {
     team,

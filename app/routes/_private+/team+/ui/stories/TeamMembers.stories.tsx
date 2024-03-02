@@ -1,7 +1,7 @@
 import { withRouter } from "storybook-addon-react-router-v6"
 import type { Meta, StoryObj } from "@storybook/react"
 import { TeamMembers } from "../TeamMembers"
-import { CONTACTS } from "temp.contacts"
+import { CONTACTS } from "data/contacts"
 import { createKeyset, redactKeys } from "@localfirst/auth"
 import { Contact, ExtendedContact, InvitationStatus } from "types/types"
 

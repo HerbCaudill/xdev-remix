@@ -1,5 +1,4 @@
-import cx from "classnames"
-import * as clipboard from "clipboardy"
+import clipboard from "clipboardy"
 import { useState } from "react"
 import { button } from "ui/cva/button"
 

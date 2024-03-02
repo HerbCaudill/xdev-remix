@@ -1,10 +1,10 @@
-import { useTeam } from "routes/auth+/hooks/useTeam"
 import { useLiveQuery } from "dexie-react-hooks"
-import { DoneDisplay } from "routes/_private+/dones+/ui/DoneDisplay"
-import { useDones } from "routes/_private+/dones+/hooks/useDones"
 import { useSelectedWeek } from "hooks/useSelectedWeek"
+import { useTeam } from "hooks/useTeam"
 import { DoneData } from "types/types"
 import { Avatar } from "ui/Avatar"
+import { useDones } from "./hooks/useDones"
+import { DoneDisplay } from "./ui/DoneDisplay"
 
 export default function TeamDones() {
   const { start, end } = useSelectedWeek()

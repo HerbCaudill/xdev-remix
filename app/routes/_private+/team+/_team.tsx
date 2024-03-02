@@ -1,4 +1,4 @@
-import { useTeam } from "routes/auth+/hooks/useTeam"
+import { useTeam } from "hooks/useTeam"
 import { SecondaryNav } from "ui/SecondaryNav"
 import { TeamMembers } from "./ui/TeamMembers"
 

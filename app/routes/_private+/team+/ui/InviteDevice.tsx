@@ -1,12 +1,9 @@
 import { getShareId } from "@localfirst/auth-provider-automerge-repo"
+import { useAuth } from "context/auth/useAuth"
 import { useState } from "react"
-import { Button } from "ui/Button"
 import { Dialog } from "ui/Dialog"
-import { CopyCode } from "./CopyCode"
-
-// TODO: shouldn't have to import from routes, this should be somewhere else
-import { useAuth } from "routes/auth+/hooks/useAuth"
 import { button } from "ui/cva/button"
+import { CopyCode } from "./CopyCode"
 
 export const InviteDevice = () => {
   const [isOpen, setIsOpen] = useState(false)

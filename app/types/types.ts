@@ -62,7 +62,7 @@ export type PartialDoneData = Omit<
 /** The "staff directory" record of a user. */
 export type Contact = {
   /** Reference to the Automerge document containing their staff contact info */
-  documentId: string
+  documentId: DocumentId
 
   /**
    * If this contact is a member, this is their localfirst/auth userId. If not, this
