@@ -29,6 +29,7 @@ declare global {
   const IconLogout2: typeof import('~icons/tabler/logout2.jsx')['default']
   const IconMenu2: typeof import('~icons/tabler/menu2.jsx')['default']
   const IconRun: typeof import('~icons/tabler/run.jsx')['default']
+  const IconTrash: typeof import('~icons/tabler/trash.jsx')['default']
   const IconUser: typeof import('~icons/tabler/user.jsx')['default']
   const IconUsersGroup: typeof import('~icons/tabler/users-group.jsx')['default']
   const Link: typeof import('@remix-run/react')['Link']
