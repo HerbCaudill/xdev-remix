@@ -23,6 +23,38 @@ export const setupAuth = async (setupInfo: AuthSetupInfo): Promise<SetupResult> 
       // Once we're admitted, we'll get the Team data
       const { team } = await eventPromise(auth, "joined")
 
+      // At this point, we still don't know who we are 😳 - specifically, which contact document is
+      // ours. When we were invited, our invitation ID was recorded on our contact document. We can
+      // use our invitation seed to derive our invitation ID, and then look up our contact document.
+
+      // Our invitation ID was originally derived from the invitation seed; we can use the same code
+      // to derive it again.
+      const invitationId = Auth.invitation.deriveId(invitationSeed)
+
+      // Now the tricky part: Finding the contact document that's linked to our invitation.
+      // Elsewhere in the app we've encapsulated all this stuff (useTeam etc) but those hooks rely
+      // on auth context already existing, and we're being called by AuthContextProvider in order to
+      // _create_ that context. But we do have the repo. We can get the root document ID from the
+      // team, and look up that document in the repo. It will contain the list of contact IDs, and
+      // we can use that to retrieve all the contact documents.
+
+      const rootDocumentId = getRootDocumentIdFromTeam(team)
+
+      const rootDoc = await repo.find<SharedState>(rootDocumentId).doc()
+      if (!rootDoc) throw new Error(`Didn't find the root document ${rootDocumentId} in the repo`)
+
+      const contactDocs = await Promise.all(
+        rootDoc.contacts.map(id => repo.find<Contact>(id)).map(handle => handle.doc()),
+      )
+
+      const ourContactDoc = contactDocs.find(doc => doc?.invitationId === invitationId)
+      if (!ourContactDoc)
+        throw new Error(`Didn't find a contact doc containing our invitation ID ${invitationId}`)
+
+      // Update the contact document with our new user ID
+      const ourContactDocHandle = repo.find<Contact>(ourContactDoc.documentId)
+      ourContactDocHandle.change(s => (s.userId = user.userId))
+
       return { device, user, team, auth, repo }
     }
 
