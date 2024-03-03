@@ -1,7 +1,9 @@
 import { button } from "ui/cva/button"
 
 export function InvitationForm({ heading, onSubmit }: Props) {
-  const [invitationCode, setInvitationCode] = useState<string>("")
+  const params = useParams()
+
+  const [invitationCode, setInvitationCode] = useState<string | undefined>(params["*"])
 
   // hooks ↑
 
