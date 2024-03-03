@@ -10,6 +10,8 @@ export function InviteMemberDialog({ afterLeave, contact, invitationCode }: Prop
   }, [contact])
 
   if (!invitationCode) return null
+
+  const url = `${window.location.origin}/setup/join-team/${invitationCode}`
   return (
     <Dialog
       isOpen={isOpen}
@@ -18,8 +20,8 @@ export function InviteMemberDialog({ afterLeave, contact, invitationCode }: Prop
       afterLeave={afterLeave}
       children={
         <div className="flex flex-col space-y-4">
-          <p>Copy this code and send it to {contact.firstName}.</p>
-          <CopyCode code={invitationCode!} />
+          <p>Copy this link and send it to {contact.firstName}.</p>
+          <CopyCode code={invitationCode} />
         </div>
       }
       buttons={
